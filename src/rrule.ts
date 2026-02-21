@@ -3,17 +3,11 @@ import type IterResult from './iterresult';
 import type { Language } from './nlp/i18n';
 import { fromText, isFullyConvertible, parseText, toText } from './nlp/index';
 import type { DateFormatter, GetText } from './nlp/totext';
-import { optionsToString } from './optionstostring';
-import { initializeOptions, parseOptions } from './parseoptions';
-import { parseString } from './parsestring';
+import { initializeOptions, parseOptions } from './parse/options';
+import { parseString } from './parse/string';
+import { optionsToString } from './parse/stringify';
 import { RRuleBase } from './rrulebase';
-import {
-  Frequency,
-  type IterResultType,
-  type Options,
-  type ParsedOptions,
-  type QueryMethodTypes,
-} from './types';
+import { Frequency, type IterResultType, type Options, type ParsedOptions, type QueryMethodTypes } from './types';
 import { Weekday } from './weekday';
 
 // =============================================================================
@@ -117,9 +111,7 @@ export class RRule extends RRuleBase {
 
   static optionsToString = optionsToString;
 
-  protected _iter<M extends QueryMethodTypes>(
-    iterResult: IterResult<M>,
-  ): IterResultType<M> {
+  protected _iter<M extends QueryMethodTypes>(iterResult: IterResult<M>): IterResultType<M> {
     return iter(iterResult, this.options);
   }
 
@@ -137,11 +129,7 @@ export class RRule extends RRuleBase {
    * Will convert all rules described in nlp:ToText
    * to text.
    */
-  toText(
-    gettext?: GetText,
-    language?: Language,
-    dateFormatter?: DateFormatter,
-  ) {
+  toText(gettext?: GetText, language?: Language, dateFormatter?: DateFormatter) {
     return toText(this, gettext, language, dateFormatter);
   }
 

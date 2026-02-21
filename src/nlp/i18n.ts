@@ -11,15 +11,7 @@ export interface Language {
 }
 
 const ENGLISH: Language = {
-  dayNames: [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ],
+  dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   monthNames: [
     'January',
     'February',

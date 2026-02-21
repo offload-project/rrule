@@ -1,7 +1,7 @@
+import { datetime, sort, toOrdinal } from '../date';
 import { Time } from '../datetime';
-import { datetime, sort, toOrdinal } from '../dateutil';
 import { isPresent, notEmpty, range, repeat } from '../helpers';
-import { Frequency, type ParsedOptions } from '../types';
+import { Frequency, freqIsDailyOrGreater, type ParsedOptions } from '../types';
 import { easter } from './easter';
 import { type MonthInfo, rebuildMonth } from './monthinfo';
 import { rebuildYear, type YearInfo } from './yearinfo';
@@ -18,7 +18,6 @@ export default class Iterinfo {
   public monthinfo!: MonthInfo;
   public eastermask!: number[] | null;
 
-  // eslint-disable-next-line no-empty-function
   constructor(private options: ParsedOptions) {}
 
   rebuild(year: number, month: number) {
@@ -28,19 +27,9 @@ export default class Iterinfo {
       this.yearinfo = rebuildYear(year, options);
     }
 
-    if (
-      notEmpty(options.bynweekday) &&
-      (month !== this.lastmonth || year !== this.lastyear)
-    ) {
+    if (notEmpty(options.bynweekday) && (month !== this.lastmonth || year !== this.lastyear)) {
       const { yearlen, mrange, wdaymask } = this.yearinfo;
-      this.monthinfo = rebuildMonth(
-        year,
-        month,
-        yearlen,
-        mrange,
-        wdaymask,
-        options,
-      );
+      this.monthinfo = rebuildMonth(year, month, yearlen, mrange, wdaymask, options);
     }
 
     if (isPresent(options.byeaster)) {
@@ -138,9 +127,7 @@ export default class Iterinfo {
   }
 
   mtimeset(hour: number, minute: number, _: number, millisecond: number) {
-    const set = this.options.bysecond.map(
-      (second) => new Time(hour, minute, second, millisecond),
-    );
+    const set = this.options.bysecond.map((second) => new Time(hour, minute, second, millisecond));
 
     sort(set);
     return set;
@@ -177,4 +164,22 @@ export default class Iterinfo {
         return this.stimeset.bind(this);
     }
   }
+}
+
+export function buildTimeset(opts: ParsedOptions) {
+  const millisecondModulo = opts.dtstart.getTime() % 1000;
+  if (!freqIsDailyOrGreater(opts.freq)) {
+    return [];
+  }
+
+  const timeset: Time[] = [];
+  opts.byhour.forEach((hour) => {
+    opts.byminute.forEach((minute) => {
+      opts.bysecond.forEach((second) => {
+        timeset.push(new Time(hour, minute, second, millisecondModulo));
+      });
+    });
+  });
+
+  return timeset;
 }

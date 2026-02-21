@@ -1,14 +1,11 @@
 import { datetime, RRule } from '../src';
 import type { DateFormatter } from '../src/nlp/totext';
-import { optionsToString } from '../src/optionstostring';
+import { optionsToString } from '../src/parse/stringify';
 
 const texts = [
   ['Every day', 'RRULE:FREQ=DAILY'],
   ['Every day at 10, 12 and 17', 'RRULE:FREQ=DAILY;BYHOUR=10,12,17'],
-  [
-    'Every week on Sunday at 10, 12 and 17',
-    'RRULE:FREQ=WEEKLY;BYDAY=SU;BYHOUR=10,12,17',
-  ],
+  ['Every week on Sunday at 10, 12 and 17', 'RRULE:FREQ=WEEKLY;BYDAY=SU;BYHOUR=10,12,17'],
   ['Every week', 'RRULE:FREQ=WEEKLY'],
   ['Every hour', 'RRULE:FREQ=HOURLY'],
   ['Every 4 hours', 'RRULE:INTERVAL=4;FREQ=HOURLY'],
@@ -52,9 +49,7 @@ describe('NLP', () => {
     toTexts.forEach((item) => {
       const text = item[0];
       const str = item[1];
-      expect(RRule.fromString(str).toText().toLowerCase()).toBe(
-        text.toLowerCase(),
-      );
+      expect(RRule.fromString(str).toText().toLowerCase()).toBe(text.toLowerCase());
     });
   });
 
@@ -85,15 +80,7 @@ describe('NLP', () => {
   it('shows correct text for every day', () => {
     const options = {
       freq: RRule.WEEKLY,
-      byweekday: [
-        RRule.MO,
-        RRule.TU,
-        RRule.WE,
-        RRule.TH,
-        RRule.FR,
-        RRule.SA,
-        RRule.SU,
-      ],
+      byweekday: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR, RRule.SA, RRule.SU],
     };
     const rule = new RRule(options);
     expect(rule.toText()).toBe('every day');
@@ -126,11 +113,8 @@ describe('NLP', () => {
       until: datetime(2012, 11, 10),
     });
 
-    const dateFormatter: DateFormatter = (year, month, day) =>
-      `${day}. ${month}, ${year}`;
+    const dateFormatter: DateFormatter = (year, month, day) => `${day}. ${month}, ${year}`;
 
-    expect(rrule.toText(undefined, undefined, dateFormatter)).toBe(
-      'every week until 10. November, 2012',
-    );
+    expect(rrule.toText(undefined, undefined, dateFormatter)).toBe('every week until 10. November, 2012');
   });
 });

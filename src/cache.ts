@@ -1,4 +1,4 @@
-import { clone, cloneDates } from './dateutil';
+import { clone, cloneDates } from './date';
 import { isArray } from './helpers';
 import IterResult, { type IterArgs } from './iterresult';
 
@@ -7,10 +7,7 @@ export type CacheKeys = 'before' | 'after' | 'between';
 /** Max cached entries per query method (before/after/between) */
 const MAX_CACHE_SIZE = 64;
 
-function argsMatch(
-  left: IterArgs[keyof IterArgs] | undefined,
-  right: IterArgs[keyof IterArgs] | undefined,
-) {
+function argsMatch(left: IterArgs[keyof IterArgs] | undefined, right: IterArgs[keyof IterArgs] | undefined) {
   if (Array.isArray(left)) {
     if (!Array.isArray(right)) return false;
     if (left.length !== right.length) return false;
@@ -35,11 +32,7 @@ export class Cache {
    * @param {Array,Date} value - an array of dates, one date, or null
    * @param {Object?} args - _iter arguments
    */
-  public _cacheAdd(
-    what: CacheKeys | 'all',
-    value: Date[] | Date | null,
-    args?: Partial<IterArgs>,
-  ) {
+  public _cacheAdd(what: CacheKeys | 'all', value: Date[] | Date | null, args?: Partial<IterArgs>) {
     if (value) {
       value = value instanceof Date ? clone(value) : cloneDates(value);
     }
@@ -63,10 +56,7 @@ export class Cache {
    * @return []    - cached, but zero occurrences (all/between)
    * @return [Date1, DateN] - cached (all/between)
    */
-  public _cacheGet(
-    what: CacheKeys | 'all',
-    args?: Partial<IterArgs>,
-  ): Date | Date[] | false | null {
+  public _cacheGet(what: CacheKeys | 'all', args?: Partial<IterArgs>): Date | Date[] | false | null {
     let cached: Date | Date[] | false | null = false;
     const argsKeys = args ? (Object.keys(args) as (keyof IterArgs)[]) : [];
     const findCacheDiff = (item: IterArgs) => {
@@ -102,10 +92,6 @@ export class Cache {
       this._cacheAdd(what, cached, args);
     }
 
-    return isArray(cached)
-      ? cloneDates(cached)
-      : cached instanceof Date
-        ? clone(cached)
-        : cached;
+    return isArray(cached) ? cloneDates(cached) : cached instanceof Date ? clone(cached) : cached;
   }
 }

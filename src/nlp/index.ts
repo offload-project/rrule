@@ -19,7 +19,6 @@ import ToText, { type DateFormatter, type GetText } from './totext';
  *
  * Implementation of RRule.fromText() and RRule::toText().
  *
- *
  * On the client side, this file needs to be included
  * when those functions are used.
  *
@@ -97,17 +96,9 @@ import ToText, { type DateFormatter, type GetText } from './totext';
  * @param language
  * @return {Object, Boolean} the rule, or null.
  */
-const fromText = (text: string, language: Language = ENGLISH) =>
-  new RRule(parseText(text, language) || undefined);
+const fromText = (text: string, language: Language = ENGLISH) => new RRule(parseText(text, language) || undefined);
 
-const common = [
-  'count',
-  'until',
-  'interval',
-  'byweekday',
-  'bymonthday',
-  'bymonth',
-];
+const common = ['count', 'until', 'interval', 'byweekday', 'bymonthday', 'bymonth'];
 
 ToText.IMPLEMENTED = [];
 ToText.IMPLEMENTED[Frequency.HOURLY] = common;
@@ -121,12 +112,8 @@ ToText.IMPLEMENTED[Frequency.YEARLY] = ['byweekno', 'byyearday'].concat(common);
 // Export
 // =============================================================================
 
-const toText = (
-  rrule: RRule,
-  gettext?: GetText,
-  language?: Language,
-  dateFormatter?: DateFormatter,
-) => new ToText(rrule, gettext, language, dateFormatter).toString();
+const toText = (rrule: RRule, gettext?: GetText, language?: Language, dateFormatter?: DateFormatter) =>
+  new ToText(rrule, gettext, language, dateFormatter).toString();
 
 const { isFullyConvertible } = ToText;
 

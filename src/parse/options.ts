@@ -1,19 +1,8 @@
-import { Time } from './datetime';
-import { getWeekday, isDate, isValidDate } from './dateutil';
-import {
-  isArray,
-  isNumber,
-  isPresent,
-  isWeekdayStr,
-  notEmpty,
-} from './helpers';
-import { DEFAULT_OPTIONS, defaultKeys, RRule } from './rrule';
-import {
-  freqIsDailyOrGreater,
-  type Options,
-  type ParsedOptions,
-} from './types';
-import { Weekday } from './weekday';
+import { getWeekday } from '../date';
+import { isArray, isDate, isNumber, isPresent, isValidDate, isWeekdayStr, notEmpty } from '../helpers';
+import { DEFAULT_OPTIONS, defaultKeys, RRule } from '../rrule';
+import type { Options, ParsedOptions } from '../types';
+import { Weekday } from '../weekday';
 
 export function initializeOptions(options: Partial<Options>) {
   const invalid: string[] = [];
@@ -58,9 +47,7 @@ export function parseOptions(options: Partial<Options>) {
 
     for (const v of opts.bysetpos) {
       if (v === 0 || !(v >= -366 && v <= 366)) {
-        throw new Error(
-          'bysetpos must be between 1 and 366,' + ' or between -366 and -1',
-        );
+        throw new Error('bysetpos must be between 1 and 366,' + ' or between -366 and -1');
       }
     }
   }
@@ -96,11 +83,7 @@ export function parseOptions(options: Partial<Options>) {
   }
 
   // byyearday
-  if (
-    isPresent(opts.byyearday) &&
-    !isArray(opts.byyearday) &&
-    isNumber(opts.byyearday)
-  ) {
+  if (isPresent(opts.byyearday) && !isArray(opts.byyearday) && isNumber(opts.byyearday)) {
     opts.byyearday = [opts.byyearday];
   }
 
@@ -176,45 +159,24 @@ export function parseOptions(options: Partial<Options>) {
 
   // byhour
   if (!isPresent(opts.byhour)) {
-    opts.byhour =
-      opts.freq < RRule.HOURLY ? [opts.dtstart.getUTCHours()] : null;
+    opts.byhour = opts.freq < RRule.HOURLY ? [opts.dtstart.getUTCHours()] : null;
   } else if (isNumber(opts.byhour)) {
     opts.byhour = [opts.byhour];
   }
 
   // byminute
   if (!isPresent(opts.byminute)) {
-    opts.byminute =
-      opts.freq < RRule.MINUTELY ? [opts.dtstart.getUTCMinutes()] : null;
+    opts.byminute = opts.freq < RRule.MINUTELY ? [opts.dtstart.getUTCMinutes()] : null;
   } else if (isNumber(opts.byminute)) {
     opts.byminute = [opts.byminute];
   }
 
   // bysecond
   if (!isPresent(opts.bysecond)) {
-    opts.bysecond =
-      opts.freq < RRule.SECONDLY ? [opts.dtstart.getUTCSeconds()] : null;
+    opts.bysecond = opts.freq < RRule.SECONDLY ? [opts.dtstart.getUTCSeconds()] : null;
   } else if (isNumber(opts.bysecond)) {
     opts.bysecond = [opts.bysecond];
   }
 
   return { parsedOptions: opts as ParsedOptions };
-}
-
-export function buildTimeset(opts: ParsedOptions) {
-  const millisecondModulo = opts.dtstart.getTime() % 1000;
-  if (!freqIsDailyOrGreater(opts.freq)) {
-    return [];
-  }
-
-  const timeset: Time[] = [];
-  opts.byhour.forEach((hour) => {
-    opts.byminute.forEach((minute) => {
-      opts.bysecond.forEach((second) => {
-        timeset.push(new Time(hour, minute, second, millisecondModulo));
-      });
-    });
-  });
-
-  return timeset;
 }

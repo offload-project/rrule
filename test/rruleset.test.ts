@@ -1,12 +1,6 @@
 import { reset as resetMockDate, set as setMockDate } from 'mockdate';
 import { Frequency, RRule, RRuleSet, rrulestr } from '../src';
-import {
-  datetime,
-  expectedDate,
-  parse,
-  TEST_CTX,
-  testRecurring,
-} from './lib/utils';
+import { datetime, expectedDate, parse, TEST_CTX, testRecurring } from './lib/utils';
 
 describe('RRuleSet', () => {
   beforeAll(() => {
@@ -47,11 +41,7 @@ describe('RRuleSet', () => {
       }),
     );
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 4, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)]);
 
   testRecurring('testSetDate', () => {
     const set = new RRuleSet();
@@ -67,11 +57,7 @@ describe('RRuleSet', () => {
     set.rdate(datetime(1997, 9, 4, 9));
     set.rdate(datetime(1997, 9, 9, 9));
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 4, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)]);
 
   testRecurring('testSetExRule', () => {
     const set = new RRuleSet();
@@ -93,11 +79,7 @@ describe('RRuleSet', () => {
       }),
     );
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-    datetime(1997, 9, 16, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 9, 9, 0), datetime(1997, 9, 16, 9, 0)]);
 
   testRecurring('testSetExDate', () => {
     const set = new RRuleSet();
@@ -114,11 +96,7 @@ describe('RRuleSet', () => {
     set.exdate(datetime(1997, 9, 11, 9));
     set.exdate(datetime(1997, 9, 18, 9));
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-    datetime(1997, 9, 16, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 9, 9, 0), datetime(1997, 9, 16, 9, 0)]);
 
   testRecurring('testSetExDateRevOrder', () => {
     const set = new RRuleSet();
@@ -134,11 +112,7 @@ describe('RRuleSet', () => {
     set.exdate(datetime(2004, 4, 10, 9, 0));
     set.exdate(datetime(2004, 2, 10, 9, 0));
     return set;
-  }, [
-    datetime(2004, 1, 10, 9, 0),
-    datetime(2004, 3, 10, 9, 0),
-    datetime(2004, 5, 10, 9, 0),
-  ]);
+  }, [datetime(2004, 1, 10, 9, 0), datetime(2004, 3, 10, 9, 0), datetime(2004, 5, 10, 9, 0)]);
 
   testRecurring('testSetDateAndExDate', () => {
     const set = new RRuleSet();
@@ -153,11 +127,7 @@ describe('RRuleSet', () => {
     set.exdate(datetime(1997, 9, 11, 9));
     set.exdate(datetime(1997, 9, 18, 9));
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-    datetime(1997, 9, 16, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 9, 9, 0), datetime(1997, 9, 16, 9, 0)]);
 
   testRecurring('testSetDateAndExRule', () => {
     const set = new RRuleSet();
@@ -177,11 +147,7 @@ describe('RRuleSet', () => {
       }),
     );
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-    datetime(1997, 9, 16, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 9, 9, 0), datetime(1997, 9, 16, 9, 0)]);
 
   testRecurring('testSetCachePre', () => {
     const set = new RRuleSet();
@@ -203,11 +169,7 @@ describe('RRuleSet', () => {
       }),
     );
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 4, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)]);
 
   testRecurring('testSetCachePost', () => {
     const set = new RRuleSet();
@@ -230,11 +192,7 @@ describe('RRuleSet', () => {
     );
     set.all();
     return set;
-  }, [
-    datetime(1997, 9, 2, 9, 0),
-    datetime(1997, 9, 4, 9, 0),
-    datetime(1997, 9, 9, 9, 0),
-  ]);
+  }, [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)]);
 
   testRecurring('testSetInfiniteAll', () => {
     const set = new RRuleSet();
@@ -258,11 +216,7 @@ describe('RRuleSet', () => {
       method: 'all',
       args: [(_: unknown, count: number) => count < 3],
     };
-  }, [
-    datetime(2007, 9, 2, 9, 0),
-    datetime(2008, 9, 2, 9, 0),
-    datetime(2009, 9, 2, 9, 0),
-  ]);
+  }, [datetime(2007, 9, 2, 9, 0), datetime(2008, 9, 2, 9, 0), datetime(2009, 9, 2, 9, 0)]);
 
   testRecurring('testSetInfiniteBetween', () => {
     const set = new RRuleSet();
@@ -285,11 +239,7 @@ describe('RRuleSet', () => {
       method: 'between',
       args: [datetime(2000, 9, 2, 9, 0), datetime(2010, 9, 2, 9, 0)],
     };
-  }, [
-    datetime(2007, 9, 2, 9, 0),
-    datetime(2008, 9, 2, 9, 0),
-    datetime(2009, 9, 2, 9, 0),
-  ]);
+  }, [datetime(2007, 9, 2, 9, 0), datetime(2008, 9, 2, 9, 0), datetime(2009, 9, 2, 9, 0)]);
 
   testRecurring('testSetInfiniteBefore', () => {
     const set = new RRuleSet();
@@ -365,10 +315,7 @@ describe('RRuleSet', () => {
         }),
       );
 
-      expect(set.valueOf()).toEqual([
-        'DTSTART:19600101T090000Z',
-        'RRULE:FREQ=YEARLY;COUNT=2',
-      ]);
+      expect(set.valueOf()).toEqual(['DTSTART:19600101T090000Z', 'RRULE:FREQ=YEARLY;COUNT=2']);
     });
 
     it('generates multiline rules', () => {
@@ -454,9 +401,7 @@ describe('RRuleSet', () => {
 
       set.rdate(parse('19610301T090000'));
 
-      expect(set.toString()).toEqual(
-        'RDATE;TZID=America/New_York:19610201T090000,19610301T090000',
-      );
+      expect(set.toString()).toEqual('RDATE;TZID=America/New_York:19610201T090000,19610301T090000');
     });
 
     it('generates a string with RDATE in UTC when no RRULE is present', () => {
@@ -472,9 +417,7 @@ describe('RRuleSet', () => {
     });
 
     it('parses RDATE strings without an RRULE', () => {
-      const set = rrulestr(
-        'RDATE;TZID=America/New_York:19610201T090000,19610301T090000',
-      ) as RRuleSet;
+      const set = rrulestr('RDATE;TZID=America/New_York:19610201T090000,19610301T090000') as RRuleSet;
       expect(set).toBeInstanceOf(RRuleSet);
       expect(set.tzid()).toBe('America/New_York');
     });
@@ -523,26 +466,10 @@ describe('RRuleSet', () => {
       set.rdate(datetime(2002, 3, 1, 9, 0, 0));
 
       expect(set.all()).toEqual([
-        expectedDate(
-          datetime(2000, 1, 1, 9, 0, 0),
-          currentLocalDate,
-          targetZone,
-        ),
-        expectedDate(
-          datetime(2002, 1, 1, 9, 0, 0),
-          currentLocalDate,
-          targetZone,
-        ),
-        expectedDate(
-          datetime(2002, 3, 1, 9, 0, 0),
-          currentLocalDate,
-          targetZone,
-        ),
-        expectedDate(
-          datetime(2003, 1, 1, 9, 0, 0),
-          currentLocalDate,
-          targetZone,
-        ),
+        expectedDate(datetime(2000, 1, 1, 9, 0, 0), currentLocalDate, targetZone),
+        expectedDate(datetime(2002, 1, 1, 9, 0, 0), currentLocalDate, targetZone),
+        expectedDate(datetime(2002, 3, 1, 9, 0, 0), currentLocalDate, targetZone),
+        expectedDate(datetime(2003, 1, 1, 9, 0, 0), currentLocalDate, targetZone),
       ]);
 
       resetMockDate();
@@ -553,17 +480,11 @@ describe('RRuleSet', () => {
       set.tzid('America/Los_Angeles');
       set.rdate(datetime(2010, 11, 10, 10, 0, 0));
 
-      expect(set.valueOf()).toEqual([
-        'RDATE;TZID=America/Los_Angeles:20101110T100000',
-      ]);
-      expect(set.toString()).toBe(
-        'RDATE;TZID=America/Los_Angeles:20101110T100000',
-      );
+      expect(set.valueOf()).toEqual(['RDATE;TZID=America/Los_Angeles:20101110T100000']);
+      expect(set.toString()).toBe('RDATE;TZID=America/Los_Angeles:20101110T100000');
 
       const set2 = rrulestr(set.toString());
-      expect(set2.toString()).toBe(
-        'RDATE;TZID=America/Los_Angeles:20101110T100000',
-      );
+      expect(set2.toString()).toBe('RDATE;TZID=America/Los_Angeles:20101110T100000');
     });
 
     it('generates correcty zoned recurrences when a tzid is present but no rrule is present', () => {
@@ -578,11 +499,7 @@ describe('RRuleSet', () => {
       set.rdate(new Date(Date.parse('2002-03-01T09:00:00')));
 
       expect(set.all()).toEqual([
-        expectedDate(
-          new Date(Date.parse('2002-03-01T09:00:00')),
-          currentLocalDate,
-          targetZone,
-        ),
+        expectedDate(new Date(Date.parse('2002-03-01T09:00:00')), currentLocalDate, targetZone),
       ]);
 
       resetMockDate();
@@ -598,10 +515,7 @@ describe('RRuleSet', () => {
 
     it('updates the ruleset to exclude recurrence date', () => {
       const legacy = ['RRULE:DTSTART=19990104T110000Z;FREQ=DAILY;INTERVAL=1'];
-      const repeat = [
-        'DTSTART:19990104T110000Z',
-        'RRULE:FREQ=DAILY;INTERVAL=1',
-      ];
+      const repeat = ['DTSTART:19990104T110000Z', 'RRULE:FREQ=DAILY;INTERVAL=1'];
 
       const recurrenceDate = datetime(2017, 8, 21, 16, 0, 0);
 
@@ -614,10 +528,7 @@ describe('RRuleSet', () => {
 
     it('updates the ruleset to exclude recurrence rule', () => {
       const legacy = ['RRULE:DTSTART=19990104T110000Z;FREQ=DAILY;INTERVAL=1'];
-      const repeat = [
-        'DTSTART:19990104T110000Z',
-        'RRULE:FREQ=DAILY;INTERVAL=1',
-      ];
+      const repeat = ['DTSTART:19990104T110000Z', 'RRULE:FREQ=DAILY;INTERVAL=1'];
 
       const exrule = new RRule({
         dtstart: datetime(1999, 1, 4, 11, 0, 0),
@@ -638,62 +549,33 @@ describe('RRuleSet', () => {
       const original = ['DTSTART:20171201T080000Z', 'RRULE:FREQ=WEEKLY'];
 
       expectRecurrence([original, legacy]).toBeUpdatedWithEndDate(
-        [
-          'DTSTART:20171201T080000Z',
-          'RRULE:FREQ=WEEKLY;UNTIL=20171224T235959Z',
-        ].join('\n'),
+        ['DTSTART:20171201T080000Z', 'RRULE:FREQ=WEEKLY;UNTIL=20171224T235959Z'].join('\n'),
       );
     });
 
     it('replaces an existing end date with a new one', () => {
-      const legacy = [
-        'RRULE:DTSTART=20171201T080000Z;FREQ=WEEKLY;UNTIL=20180301T080000Z',
-      ];
-      const original = [
-        'DTSTART:20171201T080000Z',
-        'RRULE:FREQ=WEEKLY;UNTIL=20180301T080000Z',
-      ];
+      const legacy = ['RRULE:DTSTART=20171201T080000Z;FREQ=WEEKLY;UNTIL=20180301T080000Z'];
+      const original = ['DTSTART:20171201T080000Z', 'RRULE:FREQ=WEEKLY;UNTIL=20180301T080000Z'];
 
       expectRecurrence([original, legacy]).toBeUpdatedWithEndDate(
-        [
-          'DTSTART:20171201T080000Z',
-          'RRULE:FREQ=WEEKLY;UNTIL=20171224T235959Z',
-        ].join('\n'),
+        ['DTSTART:20171201T080000Z', 'RRULE:FREQ=WEEKLY;UNTIL=20171224T235959Z'].join('\n'),
       );
     });
 
     it('handles rule in a timezone', () => {
-      const legacy = [
-        'RRULE:DTSTART;TZID=America/New_York:20171201T080000;FREQ=WEEKLY',
-      ];
-      const original = [
-        'DTSTART;TZID=America/New_York:20171201T080000',
-        'RRULE:FREQ=WEEKLY',
-      ];
+      const legacy = ['RRULE:DTSTART;TZID=America/New_York:20171201T080000;FREQ=WEEKLY'];
+      const original = ['DTSTART;TZID=America/New_York:20171201T080000', 'RRULE:FREQ=WEEKLY'];
 
       expectRecurrence([original, legacy]).toBeUpdatedWithEndDate(
-        [
-          'DTSTART;TZID=America/New_York:20171201T080000',
-          'RRULE:FREQ=WEEKLY;UNTIL=20171224T235959',
-        ].join('\n'),
+        ['DTSTART;TZID=America/New_York:20171201T080000', 'RRULE:FREQ=WEEKLY;UNTIL=20171224T235959'].join('\n'),
       );
     });
 
-    const updateWithEndDate = (
-      recurrence: string[],
-      updatedCursor: Date,
-    ): string => {
+    const updateWithEndDate = (recurrence: string[], updatedCursor: Date): string => {
       const oneDay = 24 * 60 * 60 * 1000;
       const oneDayEarlier = new Date(updatedCursor.getTime() - oneDay);
       const newEndDate = new Date(
-        Date.UTC(
-          oneDayEarlier.getUTCFullYear(),
-          oneDayEarlier.getUTCMonth(),
-          oneDayEarlier.getUTCDate(),
-          23,
-          59,
-          59,
-        ),
+        Date.UTC(oneDayEarlier.getUTCFullYear(), oneDayEarlier.getUTCMonth(), oneDayEarlier.getUTCDate(), 23, 59, 59),
       );
 
       const rrule = rrulestr(recurrence.join('\n'));
@@ -709,10 +591,7 @@ describe('RRuleSet', () => {
       return newRuleSet.toString();
     };
 
-    const amendRuleSetWithExceptionDate = (
-      recurrence: string[],
-      cursor: Date,
-    ): string => {
+    const amendRuleSetWithExceptionDate = (recurrence: string[], cursor: Date): string => {
       const ruleSet = rrulestr(recurrence.join('\n'), {
         forceset: true,
       }) as RRuleSet;
@@ -720,10 +599,7 @@ describe('RRuleSet', () => {
       return ruleSet.toString();
     };
 
-    const amendRuleSetWithExceptionRule = (
-      recurrence: string[],
-      exrule: RRule,
-    ): string => {
+    const amendRuleSetWithExceptionRule = (recurrence: string[], exrule: RRule): string => {
       const ruleSet = rrulestr(recurrence.join('\n'), {
         forceset: true,
       }) as RRuleSet;
@@ -807,9 +683,7 @@ describe('RRuleSet', () => {
       });
       set.exrule(rrule);
 
-      expect(set.exrules().map((e) => e.toString())).toEqual([
-        rrule.toString(),
-      ]);
+      expect(set.exrules().map((e) => e.toString())).toEqual([rrule.toString()]);
     });
 
     it('rdates()', () => {

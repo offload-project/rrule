@@ -21,17 +21,9 @@ export type GetText = (id: string | number | Weekday) => string;
 
 const defaultGetText: GetText = (id) => id.toString();
 
-export type DateFormatter = (
-  year: number,
-  month: string,
-  day: number,
-) => string;
+export type DateFormatter = (year: number, month: string, day: number) => string;
 
-const defaultDateFormatter: DateFormatter = (
-  year: number,
-  month: string,
-  day: number,
-) => `${month} ${day}, ${year}`;
+const defaultDateFormatter: DateFormatter = (year: number, month: string, day: number) => `${month} ${day}, ${year}`;
 
 /**
  *
@@ -90,12 +82,8 @@ export default class ToText {
       const days = String(byweekday);
 
       this.byweekday = {
-        allWeeks: byweekday.filter(
-          (weekday: ByWeekday) => !(weekday as Weekday).n,
-        ),
-        someWeeks: byweekday.filter((weekday: ByWeekday) =>
-          Boolean((weekday as Weekday).n),
-        ),
+        allWeeks: byweekday.filter((weekday: ByWeekday) => !(weekday as Weekday).n),
+        someWeeks: byweekday.filter((weekday: ByWeekday) => Boolean((weekday as Weekday).n)),
         isWeekdays:
           days.indexOf('MO') !== -1 &&
           days.indexOf('TU') !== -1 &&
@@ -114,8 +102,7 @@ export default class ToText {
           days.indexOf('SU') !== -1,
       };
 
-      const sortWeekDays = (a: ByWeekday, b: ByWeekday) =>
-        (a as Weekday).weekday - (b as Weekday).weekday;
+      const sortWeekDays = (a: ByWeekday, b: ByWeekday) => (a as Weekday).weekday - (b as Weekday).weekday;
 
       this.byweekday.allWeeks!.sort(sortWeekDays);
       this.byweekday.someWeeks!.sort(sortWeekDays);
@@ -166,26 +153,19 @@ export default class ToText {
     }
 
     this.text = [gettext('every')];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // @ts-expect-error - dynamic method dispatch via frequency name
     this[RRule.FREQUENCIES[this.options.freq]]();
 
     if (this.options.until) {
       this.add(gettext('until'));
       const until = this.options.until;
       this.add(
-        this.dateFormatter(
-          until.getUTCFullYear(),
-          this.language.monthNames[until.getUTCMonth()]!,
-          until.getUTCDate(),
-        ),
+        this.dateFormatter(until.getUTCFullYear(), this.language.monthNames[until.getUTCMonth()]!, until.getUTCDate()),
       );
     } else if (this.options.count) {
       this.add(gettext('for'))
         .add(this.options.count.toString())
-        .add(
-          this.plural(this.options.count) ? gettext('times') : gettext('time'),
-        );
+        .add(this.plural(this.options.count) ? gettext('times') : gettext('time'));
     }
 
     if (this.origOptions.dtstart) {
@@ -211,9 +191,7 @@ export default class ToText {
 
     if (this.options.interval !== 1) this.add(this.options.interval.toString());
 
-    this.add(
-      this.plural(this.options.interval) ? gettext('hours') : gettext('hour'),
-    );
+    this.add(this.plural(this.options.interval) ? gettext('hours') : gettext('hour'));
   }
 
   MINUTELY() {
@@ -221,11 +199,7 @@ export default class ToText {
 
     if (this.options.interval !== 1) this.add(this.options.interval.toString());
 
-    this.add(
-      this.plural(this.options.interval)
-        ? gettext('minutes')
-        : gettext('minute'),
-    );
+    this.add(this.plural(this.options.interval) ? gettext('minutes') : gettext('minute'));
   }
 
   DAILY() {
@@ -234,15 +208,9 @@ export default class ToText {
     if (this.options.interval !== 1) this.add(this.options.interval.toString());
 
     if (this.byweekday?.isWeekdays) {
-      this.add(
-        this.plural(this.options.interval)
-          ? gettext('weekdays')
-          : gettext('weekday'),
-      );
+      this.add(this.plural(this.options.interval) ? gettext('weekdays') : gettext('weekday'));
     } else {
-      this.add(
-        this.plural(this.options.interval) ? gettext('days') : gettext('day'),
-      );
+      this.add(this.plural(this.options.interval) ? gettext('days') : gettext('day'));
     }
 
     if (this.origOptions.bymonth) {
@@ -270,18 +238,12 @@ export default class ToText {
 
     if (this.byweekday?.isWeekdays) {
       if (this.options.interval === 1) {
-        this.add(
-          this.plural(this.options.interval)
-            ? gettext('weekdays')
-            : gettext('weekday'),
-        );
+        this.add(this.plural(this.options.interval) ? gettext('weekdays') : gettext('weekday'));
       } else {
         this.add(gettext('on')).add(gettext('weekdays'));
       }
     } else if (this.byweekday?.isEveryDay) {
-      this.add(
-        this.plural(this.options.interval) ? gettext('days') : gettext('day'),
-      );
+      this.add(this.plural(this.options.interval) ? gettext('days') : gettext('day'));
     } else {
       if (this.options.interval === 1) this.add(gettext('week'));
 
@@ -309,19 +271,13 @@ export default class ToText {
       if (this.options.interval !== 1) {
         this.add(this.options.interval.toString()).add(gettext('months'));
         if (this.plural(this.options.interval)) this.add(gettext('in'));
-      } else {
-        // this.add(gettext('MONTH'))
       }
       this._bymonth();
     } else {
       if (this.options.interval !== 1) {
         this.add(this.options.interval.toString());
       }
-      this.add(
-        this.plural(this.options.interval)
-          ? gettext('months')
-          : gettext('month'),
-      );
+      this.add(this.plural(this.options.interval) ? gettext('months') : gettext('month'));
     }
     if (this.bymonthday) {
       this._bymonthday();
@@ -339,17 +295,13 @@ export default class ToText {
       if (this.options.interval !== 1) {
         this.add(this.options.interval.toString());
         this.add(gettext('years'));
-      } else {
-        // this.add(gettext('YEAR'))
       }
       this._bymonth();
     } else {
       if (this.options.interval !== 1) {
         this.add(this.options.interval.toString());
       }
-      this.add(
-        this.plural(this.options.interval) ? gettext('years') : gettext('year'),
-      );
+      this.add(this.plural(this.options.interval) ? gettext('years') : gettext('year'));
     }
 
     if (this.bymonthday) {
@@ -360,23 +312,13 @@ export default class ToText {
 
     if (this.options.byyearday) {
       this.add(gettext('on the'))
-        .add(
-          this.list(
-            this.options.byyearday,
-            this.nth as GetText,
-            gettext('and'),
-          ),
-        )
+        .add(this.list(this.options.byyearday, this.nth as GetText, gettext('and')))
         .add(gettext('day'));
     }
 
     if (this.options.byweekno) {
       this.add(gettext('in'))
-        .add(
-          this.plural((this.options.byweekno as number[]).length)
-            ? gettext('weeks')
-            : gettext('week'),
-        )
+        .add(this.plural((this.options.byweekno as number[]).length) ? gettext('weeks') : gettext('week'))
         .add(this.list(this.options.byweekno, undefined, gettext('and')));
     }
   }
@@ -385,40 +327,25 @@ export default class ToText {
     const gettext = this.gettext;
     if (this.byweekday?.allWeeks) {
       this.add(gettext('on'))
-        .add(
-          this.list(
-            this.byweekday.allWeeks,
-            this.weekdaytext as GetText,
-            gettext('or'),
-          ),
-        )
+        .add(this.list(this.byweekday.allWeeks, this.weekdaytext as GetText, gettext('or')))
         .add(gettext('the'))
         .add(this.list(this.bymonthday!, this.nth as GetText, gettext('or')));
     } else {
-      this.add(gettext('on the')).add(
-        this.list(this.bymonthday!, this.nth as GetText, gettext('and')),
-      );
+      this.add(gettext('on the')).add(this.list(this.bymonthday!, this.nth as GetText, gettext('and')));
     }
-    // this.add(gettext('DAY'))
   }
 
   private _byweekday() {
     const gettext = this.gettext;
     if (this.byweekday!.allWeeks && !this.byweekday!.isWeekdays) {
-      this.add(gettext('on')).add(
-        this.list(this.byweekday!.allWeeks, this.weekdaytext as GetText),
-      );
+      this.add(gettext('on')).add(this.list(this.byweekday!.allWeeks, this.weekdaytext as GetText));
     }
 
     if (this.byweekday!.someWeeks) {
       if (this.byweekday!.allWeeks) this.add(gettext('and'));
 
       this.add(gettext('on the')).add(
-        this.list(
-          this.byweekday!.someWeeks,
-          this.weekdaytext as GetText,
-          gettext('and'),
-        ),
+        this.list(this.byweekday!.someWeeks, this.weekdaytext as GetText, gettext('and')),
       );
     }
   }
@@ -426,19 +353,11 @@ export default class ToText {
   private _byhour() {
     const gettext = this.gettext;
 
-    this.add(gettext('at')).add(
-      this.list(this.origOptions.byhour!, undefined, gettext('and')),
-    );
+    this.add(gettext('at')).add(this.list(this.origOptions.byhour!, undefined, gettext('and')));
   }
 
   private _bymonth() {
-    this.add(
-      this.list(
-        this.options.bymonth,
-        this.monthtext as unknown as GetText,
-        this.gettext('and'),
-      ),
-    );
+    this.add(this.list(this.options.bymonth, this.monthtext as unknown as GetText, this.gettext('and')));
   }
 
   nth(n: number | string) {
@@ -476,10 +395,7 @@ export default class ToText {
 
   weekdaytext(wday: Weekday | number) {
     const weekday = isNumber(wday) ? (wday + 1) % 7 : wday.getJsWeekday();
-    return (
-      ((wday as Weekday).n ? `${this.nth((wday as Weekday).n!)} ` : '') +
-      this.language.dayNames[weekday]
-    );
+    return ((wday as Weekday).n ? `${this.nth((wday as Weekday).n!)} ` : '') + this.language.dayNames[weekday];
   }
 
   plural(n: number) {
@@ -492,20 +408,11 @@ export default class ToText {
     return this;
   }
 
-  list(
-    arr: ByWeekday | ByWeekday[],
-    callback?: GetText,
-    finalDelim?: string,
-    delim = ',',
-  ) {
+  list(arr: ByWeekday | ByWeekday[], callback?: GetText, finalDelim?: string, delim = ',') {
     if (!isArray(arr)) {
       arr = [arr];
     }
-    const delimJoin = (
-      array: string[],
-      delimiter: string,
-      finalDelimiter: string,
-    ) => {
+    const delimJoin = (array: string[], delimiter: string, finalDelimiter: string) => {
       let list = '';
 
       for (let i = 0; i < array.length; i++) {

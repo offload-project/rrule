@@ -1,9 +1,8 @@
-import { timeToUntilString } from './dateutil';
-import { DateWithZone } from './datewithzone';
-import { isArray, isNumber, isPresent, toArray } from './helpers';
-import { DEFAULT_OPTIONS, RRule } from './rrule';
-import type { Options } from './types';
-import { Weekday } from './weekday';
+import { DateWithZone, timeToUntilString } from '../date';
+import { isArray, isNumber, isPresent, toArray } from '../helpers';
+import { DEFAULT_OPTIONS, RRule } from '../rrule';
+import type { Options } from '../types';
+import { Weekday } from '../weekday';
 
 export function optionsToString(options: Partial<Options>) {
   const rrule: string[][] = [];
@@ -45,9 +44,7 @@ export function optionsToString(options: Partial<Options>) {
 
           */
         key = 'BYDAY';
-        outValue = toArray<Weekday | number[] | number>(
-          value as Weekday | number[] | number,
-        )
+        outValue = toArray<Weekday | number[] | number>(value as Weekday | number[] | number)
           .map((wday) => {
             if (wday instanceof Weekday) {
               return wday;

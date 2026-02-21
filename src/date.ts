@@ -2,14 +2,8 @@ import type { Time } from './datetime';
 
 type Datelike = Pick<Date, 'getTime'>;
 
-export const datetime = (
-  y: number,
-  m: number,
-  d: number,
-  h = 0,
-  i = 0,
-  s = 0,
-) => new Date(Date.UTC(y, m - 1, d, h, i, s));
+export const datetime = (y: number, m: number, d: number, h = 0, i = 0, s = 0) =>
+  new Date(Date.UTC(y, m - 1, d, h, i, s));
 
 /**
  * General date-related utilities.
@@ -45,26 +39,11 @@ export const PY_WEEKDAYS = [6, 0, 1, 2, 3, 4, 5];
  * py_date.timetuple()[7]
  */
 export const getYearDay = (date: Date) => {
-  const dateNoTime = new Date(
-    date.getUTCFullYear(),
-    date.getUTCMonth(),
-    date.getUTCDate(),
-  );
-  return (
-    Math.ceil(
-      (dateNoTime.valueOf() - new Date(date.getUTCFullYear(), 0, 1).valueOf()) /
-        ONE_DAY,
-    ) + 1
-  );
+  const dateNoTime = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+  return Math.ceil((dateNoTime.valueOf() - new Date(date.getUTCFullYear(), 0, 1).valueOf()) / ONE_DAY) + 1;
 };
 
-export const isLeapYear = (year: number) =>
-  (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-
-export const isDate = (value: unknown): value is Date => value instanceof Date;
-
-export const isValidDate = (value: unknown): value is Date =>
-  isDate(value) && !Number.isNaN(value.getTime());
+export const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
 /**
  * @return {Number} the date's timezone offset in ms
@@ -95,21 +74,17 @@ export const toOrdinal = (date: Date) => daysBetween(date, ORDINAL_BASE);
 /**
  * @see - <http://docs.python.org/library/datetime.html#datetime.date.fromordinal>
  */
-export const fromOrdinal = (ordinal: number) =>
-  new Date(ORDINAL_BASE.getTime() + ordinal * ONE_DAY);
+export const fromOrdinal = (ordinal: number) => new Date(ORDINAL_BASE.getTime() + ordinal * ONE_DAY);
 
 export const getMonthDays = (date: Date): number => {
   const month = date.getUTCMonth();
-  return month === 1 && isLeapYear(date.getUTCFullYear())
-    ? 29
-    : MONTH_DAYS[month]!;
+  return month === 1 && isLeapYear(date.getUTCFullYear()) ? 29 : MONTH_DAYS[month]!;
 };
 
 /**
  * @return {Number} python-like weekday
  */
-export const getWeekday = (date: Date): number =>
-  PY_WEEKDAYS[date.getUTCDay()]!;
+export const getWeekday = (date: Date): number => PY_WEEKDAYS[date.getUTCDay()]!;
 
 /**
  * @see: <http://docs.python.org/library/calendar.html#calendar.monthrange>
@@ -204,3 +179,41 @@ export const dateInTimeZone = (date: Date, timeZone: string) => {
 
   return new Date(date.getTime() - tzOffset);
 };
+
+export class DateWithZone {
+  public date: Date;
+  public tzid?: string | null;
+
+  constructor(date: Date, tzid?: string | null) {
+    if (Number.isNaN(date.getTime())) {
+      throw new RangeError('Invalid date passed to DateWithZone');
+    }
+    this.date = date;
+    this.tzid = tzid;
+  }
+
+  private get isUTC() {
+    return !this.tzid || this.tzid.toUpperCase() === 'UTC';
+  }
+
+  public toString() {
+    const datestr = timeToUntilString(this.date.getTime(), this.isUTC);
+    if (!this.isUTC) {
+      return `;TZID=${this.tzid}:${datestr}`;
+    }
+
+    return `:${datestr}`;
+  }
+
+  public getTime() {
+    return this.date.getTime();
+  }
+
+  public rezonedDate() {
+    if (this.isUTC) {
+      return this.date;
+    }
+
+    return dateInTimeZone(this.date, this.tzid!);
+  }
+}

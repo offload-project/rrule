@@ -1,4 +1,4 @@
-import { datetime, getWeekday, isLeapYear, toOrdinal } from '../dateutil';
+import { datetime, getWeekday, isLeapYear, toOrdinal } from '../date';
 import { empty, pymod, repeat } from '../helpers';
 import {
   M365MASK,
@@ -95,7 +95,6 @@ export function rebuildYear(year: number, options: ParsedOptions) {
 
   if (options.byweekno.includes(1)) {
     // Check week number 1 of next year as well
-    // orig-TODO : Check -numweeks for next year.
     let i = no1wkst + numweeks * 7;
     if (no1wkst !== firstwkst) i -= 7 - firstwkst;
     if (i < yearlen) {

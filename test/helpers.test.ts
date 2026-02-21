@@ -1,14 +1,4 @@
-import {
-  divmod,
-  empty,
-  isArray,
-  isNumber,
-  isPresent,
-  pymod,
-  range,
-  repeat,
-  split,
-} from '../src/helpers';
+import { divmod, empty, isArray, isNumber, isPresent, pymod, range, repeat, split } from '../src/helpers';
 
 describe('isPresent', () => {
   it('is false if object is null', () => {

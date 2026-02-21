@@ -4,11 +4,13 @@
 
 import { ALL_WEEKDAYS, type WeekdayStr } from './weekday';
 
-export const isPresent = <T>(value?: T | null | undefined): value is T =>
-  value !== null && value !== undefined;
+export const isDate = (value: unknown): value is Date => value instanceof Date;
 
-export const isNumber = (value: unknown): value is number =>
-  typeof value === 'number';
+export const isValidDate = (value: unknown): value is Date => isDate(value) && !Number.isNaN(value.getTime());
+
+export const isPresent = <T>(value?: T | null | undefined): value is T => value !== null && value !== undefined;
+
+export const isNumber = (value: unknown): value is number => typeof value === 'number';
 
 export const isWeekdayStr = (value: unknown): value is WeekdayStr =>
   typeof value === 'string' && ALL_WEEKDAYS.includes(value as WeekdayStr);
@@ -53,9 +55,7 @@ export const toArray = <T>(item: T | T[]): T[] => {
  */
 export const split = (str: string, sep: string, num: number) => {
   const splits = str.split(sep);
-  return num
-    ? splits.slice(0, num).concat([splits.slice(num).join(sep)])
-    : splits;
+  return num ? splits.slice(0, num).concat([splits.slice(num).join(sep)]) : splits;
 };
 
 /**
@@ -87,8 +87,7 @@ export const divmod = (a: number, b: number) => ({
   mod: pymod(a, b),
 });
 
-export const empty = <T>(obj: T[] | null | undefined) =>
-  !isPresent(obj) || obj.length === 0;
+export const empty = <T>(obj: T[] | null | undefined) => !isPresent(obj) || obj.length === 0;
 
 /**
  * Python-like boolean
@@ -97,5 +96,4 @@ export const empty = <T>(obj: T[] | null | undefined) =>
  * the fact that in Python an empty list's/tuple's
  * boolean value is False, whereas in JS it's true
  */
-export const notEmpty = <T>(obj: T[] | null | undefined): obj is T[] =>
-  !empty(obj);
+export const notEmpty = <T>(obj: T[] | null | undefined): obj is T[] => !empty(obj);

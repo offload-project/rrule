@@ -1,7 +1,7 @@
-import { sort, timeToUntilString } from './dateutil';
+import { sort, timeToUntilString } from './date';
+import { iterSet } from './iter/set';
 import type IterResult from './iterresult';
-import { iterSet } from './iterset';
-import { optionsToString } from './optionstostring';
+import { optionsToString } from './parse/stringify';
 import { RRule } from './rrule';
 import { RRuleBase } from './rrulebase';
 import type { IterResultType, QueryMethodTypes } from './types';
@@ -56,17 +56,8 @@ export class RRuleSet extends RRuleBase {
     return undefined;
   }
 
-  _iter<M extends QueryMethodTypes>(
-    iterResult: IterResult<M>,
-  ): IterResultType<M> {
-    return iterSet(
-      iterResult,
-      this._rrule,
-      this._exrule,
-      this._rdate,
-      this._exdate,
-      this.tzid(),
-    );
+  _iter<M extends QueryMethodTypes>(iterResult: IterResult<M>): IterResultType<M> {
+    return iterSet(iterResult, this._rrule, this._exrule, this._rdate, this._exdate, this.tzid());
   }
 
   /**
@@ -221,17 +212,11 @@ function _addDate(date: Date, collection: Date[]) {
   }
 }
 
-function rdatesToString(
-  param: string,
-  rdates: Date[],
-  tzid: string | undefined,
-) {
+function rdatesToString(param: string, rdates: Date[], tzid: string | undefined) {
   const isUTC = !tzid || tzid.toUpperCase() === 'UTC';
   const header = isUTC ? `${param}:` : `${param};TZID=${tzid}:`;
 
-  const dateString = rdates
-    .map((rdate) => timeToUntilString(rdate.valueOf(), isUTC))
-    .join(',');
+  const dateString = rdates.map((rdate) => timeToUntilString(rdate.valueOf(), isUTC)).join(',');
 
   return `${header}${dateString}`;
 }

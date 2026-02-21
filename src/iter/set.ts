@@ -1,9 +1,8 @@
-import { sort } from './dateutil';
-import { DateWithZone } from './datewithzone';
-import { iter } from './iter';
-import type IterResult from './iterresult';
-import type { RRule } from './rrule';
-import type { IterResultType, QueryMethodTypes } from './types';
+import { DateWithZone, sort } from '../date';
+import type IterResult from '../iterresult';
+import type { RRule } from '../rrule';
+import type { IterResultType, QueryMethodTypes } from '../types';
+import { iter } from '.';
 
 export function iterSet<M extends QueryMethodTypes>(
   iterResult: IterResult<M>,

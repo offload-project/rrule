@@ -1,4 +1,4 @@
-import { getWeekday, MAXYEAR, monthRange } from './dateutil';
+import { getWeekday, MAXYEAR, monthRange } from './date';
 import { divmod, empty, pymod } from './helpers';
 import { Frequency, type ParsedOptions } from './types';
 
@@ -8,12 +8,7 @@ export class Time {
   public second: number;
   public millisecond: number;
 
-  constructor(
-    hour: number,
-    minute: number,
-    second: number,
-    millisecond: number,
-  ) {
+  constructor(hour: number, minute: number, second: number, millisecond: number) {
     this.hour = hour;
     this.minute = minute;
     this.second = second;
@@ -37,10 +32,7 @@ export class Time {
   }
 
   getTime() {
-    return (
-      (this.hour * 60 * 60 + this.minute * 60 + this.second) * 1000 +
-      this.millisecond
-    );
+    return (this.hour * 60 * 60 + this.minute * 60 + this.second) * 1000 + this.millisecond;
   }
 }
 
@@ -82,15 +74,7 @@ export class DateTime extends Time {
 
   getTime() {
     return new Date(
-      Date.UTC(
-        this.year,
-        this.month - 1,
-        this.day,
-        this.hour,
-        this.minute,
-        this.second,
-        this.millisecond,
-      ),
+      Date.UTC(this.year, this.month - 1, this.day, this.hour, this.minute, this.second, this.millisecond),
     ).getTime();
   }
 
@@ -156,16 +140,10 @@ export class DateTime extends Time {
     }
   }
 
-  public addMinutes(
-    minutes: number,
-    filtered: boolean,
-    byhour: number[],
-    byminute: number[],
-  ) {
+  public addMinutes(minutes: number, filtered: boolean, byhour: number[], byminute: number[]) {
     if (filtered) {
       // Jump to one iteration before next day
-      this.minute +=
-        Math.floor((1439 - (this.hour * 60 + this.minute)) / minutes) * minutes;
+      this.minute += Math.floor((1439 - (this.hour * 60 + this.minute)) / minutes) * minutes;
     }
 
     for (;;) {
@@ -176,29 +154,16 @@ export class DateTime extends Time {
         this.addHours(hourDiv, false, byhour);
       }
 
-      if (
-        (empty(byhour) || byhour.includes(this.hour)) &&
-        (empty(byminute) || byminute.includes(this.minute))
-      ) {
+      if ((empty(byhour) || byhour.includes(this.hour)) && (empty(byminute) || byminute.includes(this.minute))) {
         break;
       }
     }
   }
 
-  public addSeconds(
-    seconds: number,
-    filtered: boolean,
-    byhour: number[],
-    byminute: number[],
-    bysecond: number[],
-  ) {
+  public addSeconds(seconds: number, filtered: boolean, byhour: number[], byminute: number[], bysecond: number[]) {
     if (filtered) {
       // Jump to one iteration before next day
-      this.second +=
-        Math.floor(
-          (86399 - (this.hour * 3600 + this.minute * 60 + this.second)) /
-            seconds,
-        ) * seconds;
+      this.second += Math.floor((86399 - (this.hour * 3600 + this.minute * 60 + this.second)) / seconds) * seconds;
     }
 
     for (;;) {

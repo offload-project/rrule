@@ -3,10 +3,9 @@
 **Library for working with recurrence rules for calendar dates.**
 
 <p style="text-align:center;">
-    <img src="https://img.shields.io/npm/v/@offload-project/rrule" alt="npm version">
+    <img src="https://img.shields.io/github/package-json/v/offload-project/rrule" alt="version">
     <img alt="GitHub Actions Release Workflow Status" src="https://img.shields.io/github/actions/workflow/status/offload-project/rrule/release.yml?label=Build">
     <img alt="GitHub Actions Test Workflow Status" src="https://img.shields.io/github/actions/workflow/status/offload-project/rrule/test.yml?label=Test">
-    <img src="https://img.shields.io/npm/l/@offload-project/rrule" alt="license">
 </p>
 
 rrule.js supports recurrence rules as defined in the [iCalendar RFC](https://tools.ietf.org/html/rfc5545), with a few 

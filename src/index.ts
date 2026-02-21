@@ -15,10 +15,10 @@
  *
  */
 
-export { datetime } from './dateutil';
+export { datetime } from './date';
+export { type RRuleStrOptions, rrulestr } from './parse/rrulestr';
 export { RRule } from './rrule';
 export { RRuleBase } from './rrulebase';
 export { RRuleSet } from './rruleset';
-export { type RRuleStrOptions, rrulestr } from './rrulestr';
 export { type ByWeekday, Frequency, type Options } from './types';
 export { ALL_WEEKDAYS, Weekday, type WeekdayStr } from './weekday';
