@@ -113,7 +113,7 @@
     - Fixed stale badges, broken code examples, byeaster docs, wkst typo, LICENCE/LICENSE link, dev tooling (Biome), and documented new toText() starting
       date behavior.
 
-- 2.8.0 (2023-11-10)
+## 2.8.0
 
   - Bugfixes:
     - Don't minify `rrule.js` (minified version is still at `rrule.min.js`) ([#606](https://github.com/jkbrzt/rrule/pull/606))
