@@ -120,8 +120,6 @@ export default function parseText(text: string, language: Language = ENGLISH) {
         }
         break;
 
-      // FIXME Note: every 2 weekdays != every two weeks on weekdays.
-      // DAILY on weekdays is not a valid rule
       case 'weekday(s)':
         options.freq = RRule.WEEKLY;
         options.byweekday = [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR];
@@ -179,22 +177,17 @@ export default function parseText(text: string, language: Language = ENGLISH) {
       case 'saturday':
       case 'sunday': {
         options.freq = RRule.WEEKLY;
-        const key: WeekdayStr = ttr.symbol
-          .substr(0, 2)
-          .toUpperCase() as WeekdayStr;
+        const key: WeekdayStr = ttr.symbol.substr(0, 2).toUpperCase() as WeekdayStr;
         options.byweekday = [RRule[key]];
 
         if (!ttr.nextSymbol()) return;
 
-        // TODO check for duplicates
         while (ttr.accept('comma')) {
           if (ttr.isDone()) throw new Error('Unexpected end');
 
           const wkd = decodeWKD() as keyof typeof RRule;
           if (!wkd) {
-            throw new Error(
-              `Unexpected symbol ${ttr.symbol}, expected weekday`,
-            );
+            throw new Error(`Unexpected symbol ${ttr.symbol}, expected weekday`);
           }
 
           options.byweekday.push(RRule[wkd] as ByWeekday);
@@ -223,7 +216,6 @@ export default function parseText(text: string, language: Language = ENGLISH) {
 
         if (!ttr.nextSymbol()) return;
 
-        // TODO check for duplicates
         while (ttr.accept('comma')) {
           if (ttr.isDone()) throw new Error('Unexpected end');
 
@@ -257,14 +249,10 @@ export default function parseText(text: string, language: Language = ENGLISH) {
 
       // nth <weekday> | <weekday>
       if (nth) {
-        // ttr.nextSymbol()
-
         if (wkd) {
           ttr.nextSymbol();
           if (!options.byweekday) options.byweekday = [] as ByWeekday[];
-          (options.byweekday as ByWeekday[]).push(
-            RRule[wkd as WeekdayStr].nth(nth),
-          );
+          (options.byweekday as ByWeekday[]).push(RRule[wkd as WeekdayStr].nth(nth));
         } else {
           if (!options.bymonthday) options.bymonthday = [] as number[];
           (options.bymonthday as number[]).push(nth);
@@ -278,29 +266,19 @@ export default function parseText(text: string, language: Language = ENGLISH) {
       } else if (ttr.symbol === 'weekday(s)') {
         ttr.nextSymbol();
         if (!options.byweekday) {
-          options.byweekday = [
-            RRule.MO,
-            RRule.TU,
-            RRule.WE,
-            RRule.TH,
-            RRule.FR,
-          ];
+          options.byweekday = [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR];
         }
       } else if (ttr.symbol === 'week(s)') {
         ttr.nextSymbol();
         let n = ttr.acceptNumber();
         if (!n) {
-          throw new Error(
-            `Unexpected symbol ${ttr.symbol}, expected week number`,
-          );
+          throw new Error(`Unexpected symbol ${ttr.symbol}, expected week number`);
         }
         options.byweekno = [parseInt(n[0], 10)];
         while (ttr.accept('comma')) {
           n = ttr.acceptNumber();
           if (!n) {
-            throw new Error(
-              `Unexpected symbol ${ttr.symbol}; expected monthday`,
-            );
+            throw new Error(`Unexpected symbol ${ttr.symbol}; expected monthday`);
           }
           options.byweekno.push(parseInt(n[0], 10));
         }
@@ -437,7 +415,6 @@ export default function parseText(text: string, language: Language = ENGLISH) {
     } else if (ttr.accept('for')) {
       options.count = parseInt(ttr.value![0]!, 10);
       ttr.expect('number');
-      // ttr.expect('times')
     }
   }
 }

@@ -1,14 +1,11 @@
 import type { Options } from '../src';
 import { datetime, RRule } from '../src';
-import { optionsToString } from '../src/optionstostring';
+import { optionsToString } from '../src/parse/stringify';
 
 describe('optionsToString', () => {
   it('serializes valid single lines of rrules', () => {
     const expectations: [Partial<Options>, string][] = [
-      [
-        { freq: RRule.WEEKLY, until: datetime(2010, 1, 1, 0, 0, 0) },
-        'RRULE:FREQ=WEEKLY;UNTIL=20100101T000000Z',
-      ],
+      [{ freq: RRule.WEEKLY, until: datetime(2010, 1, 1, 0, 0, 0) }, 'RRULE:FREQ=WEEKLY;UNTIL=20100101T000000Z'],
       [
         {
           dtstart: datetime(1997, 9, 2, 9, 0, 0),

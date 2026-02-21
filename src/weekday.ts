@@ -3,15 +3,7 @@
 // =============================================================================
 
 export type WeekdayStr = 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA' | 'SU';
-export const ALL_WEEKDAYS: WeekdayStr[] = [
-  'MO',
-  'TU',
-  'WE',
-  'TH',
-  'FR',
-  'SA',
-  'SU',
-];
+export const ALL_WEEKDAYS: WeekdayStr[] = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
 
 export class Weekday {
   public readonly weekday: number;

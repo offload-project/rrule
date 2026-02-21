@@ -1,9 +1,9 @@
-import { untilStringToDate } from './dateutil';
-import { split } from './helpers';
-import { parseDtstart, parseString } from './parsestring';
-import { RRule } from './rrule';
-import { RRuleSet } from './rruleset';
-import type { Options } from './types';
+import { untilStringToDate } from '../date';
+import { split } from '../helpers';
+import { RRule } from '../rrule';
+import { RRuleSet } from '../rruleset';
+import type { Options } from '../types';
+import { parseDtstart, parseString } from './string';
 
 export interface RRuleStrOptions {
   dtstart: Date | null;
@@ -92,8 +92,7 @@ export function parseInput(s: string, options: Partial<RRuleStrOptions>) {
 }
 
 function buildRule(s: string, options: Partial<RRuleStrOptions>) {
-  const { rrulevals, rdatevals, exrulevals, exdatevals, dtstart, tzid } =
-    parseInput(s, options);
+  const { rrulevals, rdatevals, exrulevals, exdatevals, dtstart, tzid } = parseInput(s, options);
 
   const noCache = options.cache === false;
 
@@ -102,13 +101,7 @@ function buildRule(s: string, options: Partial<RRuleStrOptions>) {
     options.unfold = true;
   }
 
-  if (
-    options.forceset ||
-    rrulevals.length > 1 ||
-    rdatevals.length ||
-    exrulevals.length ||
-    exdatevals.length
-  ) {
+  if (options.forceset || rrulevals.length > 1 || rdatevals.length || exrulevals.length || exdatevals.length) {
     const rset = new RRuleSet(noCache);
 
     rset.dtstart(dtstart);
@@ -136,27 +129,16 @@ function buildRule(s: string, options: Partial<RRuleStrOptions>) {
 
   const val = rrulevals[0] || {};
   return new RRule(
-    groomRruleOptions(
-      val,
-      val.dtstart || options.dtstart || dtstart,
-      val.tzid || options.tzid || tzid,
-    ),
+    groomRruleOptions(val, val.dtstart || options.dtstart || dtstart, val.tzid || options.tzid || tzid),
     noCache,
   );
 }
 
-export function rrulestr(
-  s: string,
-  options: Partial<RRuleStrOptions> = {},
-): RRule | RRuleSet {
+export function rrulestr(s: string, options: Partial<RRuleStrOptions> = {}): RRule | RRuleSet {
   return buildRule(s, initializeOptions(options));
 }
 
-function groomRruleOptions(
-  val: Partial<Options>,
-  dtstart?: Date | null,
-  tzid?: string | null,
-) {
+function groomRruleOptions(val: Partial<Options>, dtstart?: Date | null, tzid?: string | null) {
   return {
     ...val,
     dtstart,
@@ -167,9 +149,7 @@ function groomRruleOptions(
 function initializeOptions(options: Partial<RRuleStrOptions>) {
   const invalid: string[] = [];
   const keys = Object.keys(options) as (keyof typeof options)[];
-  const defaultKeys = Object.keys(
-    DEFAULT_OPTIONS,
-  ) as (keyof typeof DEFAULT_OPTIONS)[];
+  const defaultKeys = Object.keys(DEFAULT_OPTIONS) as (keyof typeof DEFAULT_OPTIONS)[];
 
   keys.forEach((key) => {
     if (!defaultKeys.includes(key)) invalid.push(key);
@@ -222,7 +202,6 @@ function splitIntoLines(s: string, unfold = false) {
   const lines = s.split('\n');
   let i = 0;
   while (i < lines.length) {
-    // TODO
     lines[i] = lines[i]!.replace(/\s+$/g, '');
     const line = lines[i];
     if (!line) {

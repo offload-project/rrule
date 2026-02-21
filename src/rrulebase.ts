@@ -1,7 +1,6 @@
 import { Cache, type CacheKeys } from './cache';
-import CallbackIterResult from './callbackiterresult';
-import { isValidDate } from './dateutil';
-import IterResult, { type IterArgs } from './iterresult';
+import { isValidDate } from './helpers';
+import IterResult, { CallbackIterResult, type IterArgs } from './iterresult';
 import type { IterResultType, QueryMethods, QueryMethodTypes } from './types';
 
 export abstract class RRuleBase implements QueryMethods {
@@ -11,20 +10,14 @@ export abstract class RRuleBase implements QueryMethods {
     this._cache = noCache ? null : new Cache();
   }
 
-  protected abstract _iter<M extends QueryMethodTypes>(
-    iterResult: IterResult<M>,
-  ): IterResultType<M>;
+  protected abstract _iter<M extends QueryMethodTypes>(iterResult: IterResult<M>): IterResultType<M>;
 
   private _cacheGet(what: CacheKeys | 'all', args?: Partial<IterArgs>) {
     if (!this._cache) return false;
     return this._cache._cacheGet(what, args);
   }
 
-  public _cacheAdd(
-    what: CacheKeys | 'all',
-    value: Date[] | Date | null,
-    args?: Partial<IterArgs>,
-  ) {
+  public _cacheAdd(what: CacheKeys | 'all', value: Date[] | Date | null, args?: Partial<IterArgs>) {
     if (!this._cache) return;
     return this._cache._cacheAdd(what, value, args);
   }
@@ -56,12 +49,7 @@ export abstract class RRuleBase implements QueryMethods {
    *
    * @return Array
    */
-  between(
-    after: Date,
-    before: Date,
-    inc = false,
-    iterator?: (d: Date, len: number) => boolean,
-  ): Date[] {
+  between(after: Date, before: Date, inc = false, iterator?: (d: Date, len: number) => boolean): Date[] {
     if (!isValidDate(after) || !isValidDate(before)) {
       throw new Error('Invalid date passed in to RRule.between');
     }

@@ -1,5 +1,5 @@
+import { combine, fromOrdinal, sort } from '../date';
 import type { Time } from '../datetime';
-import { combine, fromOrdinal, sort } from '../dateutil';
 import { isPresent, pymod } from '../helpers';
 import type Iterinfo from '../iterinfo/index';
 
@@ -41,8 +41,6 @@ export function buildPoslist(
     const time = timeset[timepos]!;
     const date = fromOrdinal(ii.yearordinal + i);
     const res = combine(date, time);
-    // XXX: can this ever be in the array?
-    // - compare the actual date instead?
     if (!poslist.includes(res)) poslist.push(res);
   }
 

@@ -1,19 +1,13 @@
 import { datetime, Frequency, type Options, RRule } from '../src';
-import { parseString } from '../src/parsestring';
+import { parseString } from '../src/parse/string';
 
 describe('parseString', () => {
   it('parses valid single lines of rrules', () => {
     const expectations: [string, Partial<Options>][] = [
-      [
-        'FREQ=WEEKLY;UNTIL=20100101T000000Z',
-        { freq: RRule.WEEKLY, until: datetime(2010, 1, 1, 0, 0, 0) },
-      ],
+      ['FREQ=WEEKLY;UNTIL=20100101T000000Z', { freq: RRule.WEEKLY, until: datetime(2010, 1, 1, 0, 0, 0) }],
 
       // Parse also `date` but return `date-time`
-      [
-        'FREQ=WEEKLY;UNTIL=20100101',
-        { freq: RRule.WEEKLY, until: datetime(2010, 1, 1, 0, 0, 0) },
-      ],
+      ['FREQ=WEEKLY;UNTIL=20100101', { freq: RRule.WEEKLY, until: datetime(2010, 1, 1, 0, 0, 0) }],
       [
         'DTSTART;TZID=America/New_York:19970902T090000',
         {

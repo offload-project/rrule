@@ -1,7 +1,7 @@
-export { datetime } from '../../src/dateutil';
+export { datetime } from '../../src/date';
 
 import { RRule, RRuleBase } from '../../src';
-import { dateInTimeZone, datetime } from '../../src/dateutil';
+import { dateInTimeZone, datetime } from '../../src/date';
 
 export const TEST_CTX = {
   ALSO_TESTSTRING_FUNCTIONS: false,
@@ -10,10 +10,7 @@ export const TEST_CTX = {
   ALSO_TESTSUBSECOND_PRECISION: false,
 };
 
-const assertDatesEqual = (
-  actual: Date | Date[] | null,
-  expected: Date | Date[],
-) => {
+const assertDatesEqual = (actual: Date | Date[] | null, expected: Date | Date[]) => {
   if (actual === null) actual = [];
   if (!Array.isArray(actual)) actual = [actual];
   if (!Array.isArray(expected)) expected = [expected];
@@ -109,8 +106,7 @@ export const testRecurring = ((
     const maxTestDuration = 200;
     expect(time).toBeLessThan(maxTestDuration);
 
-    if (!Array.isArray(actualDates))
-      actualDates = actualDates ? [actualDates] : [];
+    if (!Array.isArray(actualDates)) actualDates = actualDates ? [actualDates] : [];
     if (!Array.isArray(expectedDates)) expectedDates = [expectedDates];
 
     assertDatesEqual(actualDates, expectedDates);
@@ -119,9 +115,7 @@ export const testRecurring = ((
     // ==========================================================
 
     if (TEST_CTX.ALSO_TESTSUBSECOND_PRECISION) {
-      expect(actualDates.map(extractTime)).toEqual(
-        expectedDates.map(extractTime),
-      );
+      expect(actualDates.map(extractTime)).toEqual(expectedDates.map(extractTime));
     }
 
     if (TEST_CTX.ALSO_TESTSTRING_FUNCTIONS) {
@@ -135,11 +129,7 @@ export const testRecurring = ((
       }
     }
 
-    if (
-      TEST_CTX.ALSO_TESTNLP_FUNCTIONS &&
-      rule instanceof RRule &&
-      rule.isFullyConvertibleToText()
-    ) {
+    if (TEST_CTX.ALSO_TESTNLP_FUNCTIONS && rule instanceof RRule && rule.isFullyConvertibleToText()) {
       // Test fromText()/toText().
       const str = rule.toString();
       const text = rule.toText();
@@ -162,20 +152,12 @@ export const testRecurring = ((
       if (expectedDates.length > 2) {
         // Test between()
         assertDatesEqual(
-          rule.between(
-            expectedDates[0]!,
-            expectedDates[expectedDates.length - 1]!,
-            true,
-          ),
+          rule.between(expectedDates[0]!, expectedDates[expectedDates.length - 1]!, true),
           expectedDates,
         );
 
         assertDatesEqual(
-          rule.between(
-            expectedDates[0]!,
-            expectedDates[expectedDates.length - 1]!,
-            false,
-          ),
+          rule.between(expectedDates[0]!, expectedDates[expectedDates.length - 1]!, false),
           expectedDates.slice(1, expectedDates.length - 1),
         );
       }
@@ -200,11 +182,7 @@ export const testRecurring = ((
 }) as TestRecurring;
 
 testRecurring.only = (...args) => {
-  testRecurring.apply(it, [...args, it.only] as unknown as [
-    string,
-    unknown,
-    Date | Date[],
-  ]);
+  testRecurring.apply(it, [...args, it.only] as unknown as [string, unknown, Date | Date[]]);
 };
 
 testRecurring.skip = (...args) => {
@@ -212,10 +190,6 @@ testRecurring.skip = (...args) => {
   it.skip(description, () => {});
 };
 
-export function expectedDate(
-  startDate: Date,
-  _currentLocalDate: Date,
-  targetZone: string,
-): Date {
+export function expectedDate(startDate: Date, _currentLocalDate: Date, targetZone: string): Date {
   return dateInTimeZone(startDate, targetZone);
 }

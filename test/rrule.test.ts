@@ -1,12 +1,6 @@
 import { reset as resetMockDate, set as setMockDate } from 'mockdate';
 import { Frequency, RRule, rrulestr } from '../src';
-import {
-  datetime,
-  expectedDate,
-  parse,
-  TEST_CTX,
-  testRecurring,
-} from './lib/utils';
+import { datetime, expectedDate, parse, TEST_CTX, testRecurring } from './lib/utils';
 
 describe('RRule', () => {
   beforeAll(() => {
@@ -139,11 +133,7 @@ describe('RRule', () => {
       method: 'between',
       args: [parse('19970902T090000'), parse('19970906T090000')],
     },
-    [
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 5, 9, 0),
-    ],
+    [datetime(1997, 9, 3, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 5, 9, 0)],
   );
 
   testRecurring(
@@ -193,11 +183,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1998, 9, 2, 9, 0),
-      datetime(1999, 9, 2, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1998, 9, 2, 9, 0), datetime(1999, 9, 2, 9, 0)],
   );
 
   testRecurring(
@@ -208,11 +194,7 @@ describe('RRule', () => {
       interval: 2,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1999, 9, 2, 9, 0),
-      datetime(2001, 9, 2, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1999, 9, 2, 9, 0), datetime(2001, 9, 2, 9, 0)],
   );
 
   testRecurring(
@@ -223,11 +205,7 @@ describe('RRule', () => {
       interval: 100,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(2097, 9, 2, 9, 0),
-      datetime(2197, 9, 2, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(2097, 9, 2, 9, 0), datetime(2197, 9, 2, 9, 0)],
   );
 
   testRecurring(
@@ -238,11 +216,7 @@ describe('RRule', () => {
       bymonth: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 2, 9, 0),
-      datetime(1998, 3, 2, 9, 0),
-      datetime(1999, 1, 2, 9, 0),
-    ],
+    [datetime(1998, 1, 2, 9, 0), datetime(1998, 3, 2, 9, 0), datetime(1999, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -253,11 +227,7 @@ describe('RRule', () => {
       bymonthday: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 10, 1, 9, 0),
-      datetime(1997, 10, 3, 9, 0),
-    ],
+    [datetime(1997, 9, 3, 9, 0), datetime(1997, 10, 1, 9, 0), datetime(1997, 10, 3, 9, 0)],
   );
 
   testRecurring(
@@ -269,11 +239,7 @@ describe('RRule', () => {
       bymonthday: [5, 7],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 5, 9, 0),
-      datetime(1998, 1, 7, 9, 0),
-      datetime(1998, 3, 5, 9, 0),
-    ],
+    [datetime(1998, 1, 5, 9, 0), datetime(1998, 1, 7, 9, 0), datetime(1998, 3, 5, 9, 0)],
   );
 
   testRecurring(
@@ -284,11 +250,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 9, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)],
   );
 
   testRecurring(
@@ -299,11 +261,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 25, 9, 0),
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 12, 31, 9, 0),
-    ],
+    [datetime(1997, 12, 25, 9, 0), datetime(1998, 1, 6, 9, 0), datetime(1998, 12, 31, 9, 0)],
   );
 
   testRecurring(
@@ -314,11 +272,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(13), RRule.TH.nth(-13)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 10, 2, 9, 0),
-      datetime(1998, 3, 31, 9, 0),
-      datetime(1998, 10, 8, 9, 0),
-    ],
+    [datetime(1997, 10, 2, 9, 0), datetime(1998, 3, 31, 9, 0), datetime(1998, 10, 8, 9, 0)],
   );
 
   testRecurring(
@@ -330,11 +284,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 8, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 8, 9, 0)],
   );
 
   testRecurring(
@@ -346,11 +296,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 29, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-    ],
+    [datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 29, 9, 0), datetime(1998, 3, 3, 9, 0)],
   );
 
   testRecurring(
@@ -362,11 +308,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(3), RRule.TH.nth(-3)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 15, 9, 0),
-      datetime(1998, 1, 20, 9, 0),
-      datetime(1998, 3, 12, 9, 0),
-    ],
+    [datetime(1998, 1, 15, 9, 0), datetime(1998, 1, 20, 9, 0), datetime(1998, 3, 12, 9, 0)],
   );
 
   testRecurring(
@@ -378,11 +320,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 2, 3, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 2, 3, 9, 0), datetime(1998, 3, 3, 9, 0)],
   );
 
   testRecurring(
@@ -395,11 +333,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-      datetime(2001, 3, 1, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 3, 3, 9, 0), datetime(2001, 3, 1, 9, 0)],
   );
 
   testRecurring(
@@ -476,11 +410,7 @@ describe('RRule', () => {
       byweekno: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 5, 11, 9, 0),
-      datetime(1998, 5, 12, 9, 0),
-      datetime(1998, 5, 13, 9, 0),
-    ],
+    [datetime(1998, 5, 11, 9, 0), datetime(1998, 5, 12, 9, 0), datetime(1998, 5, 13, 9, 0)],
   );
 
   testRecurring(
@@ -494,11 +424,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 29, 9, 0),
-      datetime(1999, 1, 4, 9, 0),
-      datetime(2000, 1, 3, 9, 0),
-    ],
+    [datetime(1997, 12, 29, 9, 0), datetime(1999, 1, 4, 9, 0), datetime(2000, 1, 3, 9, 0)],
   );
 
   testRecurring(
@@ -512,11 +438,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1998, 12, 27, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1998, 12, 27, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -528,22 +450,14 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1999, 1, 3, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1999, 1, 3, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
-  testRecurring(
-    'testYearlyByEaster',
-    new RRule({ count: 3, byeaster: 0, dtstart: parse('19970902T090000') }),
-    [
-      datetime(1998, 4, 12, 9, 0),
-      datetime(1999, 4, 4, 9, 0),
-      datetime(2000, 4, 23, 9, 0),
-    ],
-  );
+  testRecurring('testYearlyByEaster', new RRule({ count: 3, byeaster: 0, dtstart: parse('19970902T090000') }), [
+    datetime(1998, 4, 12, 9, 0),
+    datetime(1999, 4, 4, 9, 0),
+    datetime(2000, 4, 23, 9, 0),
+  ]);
 
   testRecurring(
     'testYearlyByEasterPos',
@@ -553,11 +467,7 @@ describe('RRule', () => {
       byeaster: 1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 13, 9, 0),
-      datetime(1999, 4, 5, 9, 0),
-      datetime(2000, 4, 24, 9, 0),
-    ],
+    [datetime(1998, 4, 13, 9, 0), datetime(1999, 4, 5, 9, 0), datetime(2000, 4, 24, 9, 0)],
   );
 
   testRecurring(
@@ -568,11 +478,7 @@ describe('RRule', () => {
       byeaster: -1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 11, 9, 0),
-      datetime(1999, 4, 3, 9, 0),
-      datetime(2000, 4, 22, 9, 0),
-    ],
+    [datetime(1998, 4, 11, 9, 0), datetime(1999, 4, 3, 9, 0), datetime(2000, 4, 22, 9, 0)],
   );
 
   testRecurring(
@@ -584,11 +490,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 12, 28, 9, 0),
-      datetime(2004, 12, 27, 9, 0),
-      datetime(2009, 12, 28, 9, 0),
-    ],
+    [datetime(1998, 12, 28, 9, 0), datetime(2004, 12, 27, 9, 0), datetime(2009, 12, 28, 9, 0)],
   );
 
   testRecurring(
@@ -599,11 +501,7 @@ describe('RRule', () => {
       byhour: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0),
-      datetime(1998, 9, 2, 6, 0),
-      datetime(1998, 9, 2, 18, 0),
-    ],
+    [datetime(1997, 9, 2, 18, 0), datetime(1998, 9, 2, 6, 0), datetime(1998, 9, 2, 18, 0)],
   );
 
   testRecurring(
@@ -614,11 +512,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6),
-      datetime(1997, 9, 2, 9, 18),
-      datetime(1998, 9, 2, 9, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6), datetime(1997, 9, 2, 9, 18), datetime(1998, 9, 2, 9, 6)],
   );
 
   testRecurring(
@@ -629,11 +523,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 6),
-      datetime(1997, 9, 2, 9, 0, 18),
-      datetime(1998, 9, 2, 9, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 6), datetime(1997, 9, 2, 9, 0, 18), datetime(1998, 9, 2, 9, 0, 6)],
   );
 
   testRecurring(
@@ -645,11 +535,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6),
-      datetime(1997, 9, 2, 18, 18),
-      datetime(1998, 9, 2, 6, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6), datetime(1997, 9, 2, 18, 18), datetime(1998, 9, 2, 6, 6)],
   );
 
   testRecurring(
@@ -661,11 +547,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 6),
-      datetime(1997, 9, 2, 18, 0, 18),
-      datetime(1998, 9, 2, 6, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 6), datetime(1997, 9, 2, 18, 0, 18), datetime(1998, 9, 2, 6, 0, 6)],
   );
 
   testRecurring(
@@ -677,11 +559,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 6),
-      datetime(1997, 9, 2, 9, 6, 18),
-      datetime(1997, 9, 2, 9, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 6), datetime(1997, 9, 2, 9, 6, 18), datetime(1997, 9, 2, 9, 18, 6)],
   );
 
   testRecurring(
@@ -694,11 +572,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 6),
-      datetime(1997, 9, 2, 18, 6, 18),
-      datetime(1997, 9, 2, 18, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 6), datetime(1997, 9, 2, 18, 6, 18), datetime(1997, 9, 2, 18, 18, 6)],
   );
 
   testRecurring(
@@ -711,11 +585,7 @@ describe('RRule', () => {
       bysetpos: [3, -3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 11, 15, 18, 0),
-      datetime(1998, 2, 15, 6, 0),
-      datetime(1998, 11, 15, 18, 0),
-    ],
+    [datetime(1997, 11, 15, 18, 0), datetime(1998, 2, 15, 6, 0), datetime(1998, 11, 15, 18, 0)],
   );
 
   testRecurring(
@@ -751,11 +621,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 10, 2, 9, 0),
-      datetime(1997, 11, 2, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 10, 2, 9, 0), datetime(1997, 11, 2, 9, 0)],
   );
 
   testRecurring(
@@ -766,11 +632,7 @@ describe('RRule', () => {
       interval: 2,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 11, 2, 9, 0),
-      datetime(1998, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 11, 2, 9, 0), datetime(1998, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -781,11 +643,7 @@ describe('RRule', () => {
       interval: 18,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1999, 3, 2, 9, 0),
-      datetime(2000, 9, 2, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1999, 3, 2, 9, 0), datetime(2000, 9, 2, 9, 0)],
   );
 
   testRecurring(
@@ -796,11 +654,7 @@ describe('RRule', () => {
       bymonth: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 2, 9, 0),
-      datetime(1998, 3, 2, 9, 0),
-      datetime(1999, 1, 2, 9, 0),
-    ],
+    [datetime(1998, 1, 2, 9, 0), datetime(1998, 3, 2, 9, 0), datetime(1999, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -811,11 +665,7 @@ describe('RRule', () => {
       bymonthday: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 10, 1, 9, 0),
-      datetime(1997, 10, 3, 9, 0),
-    ],
+    [datetime(1997, 9, 3, 9, 0), datetime(1997, 10, 1, 9, 0), datetime(1997, 10, 3, 9, 0)],
   );
 
   testRecurring(
@@ -827,11 +677,7 @@ describe('RRule', () => {
       bymonthday: [5, 7],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 5, 9, 0),
-      datetime(1998, 1, 7, 9, 0),
-      datetime(1998, 3, 5, 9, 0),
-    ],
+    [datetime(1998, 1, 5, 9, 0), datetime(1998, 1, 7, 9, 0), datetime(1998, 3, 5, 9, 0)],
   );
 
   testRecurring(
@@ -842,11 +688,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 9, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)],
   );
 
   testRecurring(
@@ -857,11 +699,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 25, 9, 0),
-      datetime(1997, 10, 7, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 25, 9, 0), datetime(1997, 10, 7, 9, 0)],
   );
 
   testRecurring(
@@ -872,11 +710,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(3), RRule.TH.nth(-3)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 11, 9, 0),
-      datetime(1997, 9, 16, 9, 0),
-      datetime(1997, 10, 16, 9, 0),
-    ],
+    [datetime(1997, 9, 11, 9, 0), datetime(1997, 9, 16, 9, 0), datetime(1997, 10, 16, 9, 0)],
   );
 
   testRecurring(
@@ -888,11 +722,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 8, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 8, 9, 0)],
   );
 
   testRecurring(
@@ -904,11 +734,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 29, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-    ],
+    [datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 29, 9, 0), datetime(1998, 3, 3, 9, 0)],
   );
 
   testRecurring(
@@ -920,11 +746,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(3), RRule.TH.nth(-3)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 15, 9, 0),
-      datetime(1998, 1, 20, 9, 0),
-      datetime(1998, 3, 12, 9, 0),
-    ],
+    [datetime(1998, 1, 15, 9, 0), datetime(1998, 1, 20, 9, 0), datetime(1998, 3, 12, 9, 0)],
   );
 
   testRecurring(
@@ -936,11 +758,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 2, 3, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 2, 3, 9, 0), datetime(1998, 3, 3, 9, 0)],
   );
 
   testRecurring(
@@ -953,11 +771,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-      datetime(2001, 3, 1, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 3, 3, 9, 0), datetime(2001, 3, 1, 9, 0)],
   );
 
   testRecurring(
@@ -1034,11 +848,7 @@ describe('RRule', () => {
       byweekno: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 5, 11, 9, 0),
-      datetime(1998, 5, 12, 9, 0),
-      datetime(1998, 5, 13, 9, 0),
-    ],
+    [datetime(1998, 5, 11, 9, 0), datetime(1998, 5, 12, 9, 0), datetime(1998, 5, 13, 9, 0)],
   );
 
   testRecurring(
@@ -1052,11 +862,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 29, 9, 0),
-      datetime(1999, 1, 4, 9, 0),
-      datetime(2000, 1, 3, 9, 0),
-    ],
+    [datetime(1997, 12, 29, 9, 0), datetime(1999, 1, 4, 9, 0), datetime(2000, 1, 3, 9, 0)],
   );
 
   testRecurring(
@@ -1070,11 +876,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1998, 12, 27, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1998, 12, 27, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -1086,11 +888,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1999, 1, 3, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1999, 1, 3, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -1102,11 +900,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 12, 28, 9, 0),
-      datetime(2004, 12, 27, 9, 0),
-      datetime(2009, 12, 28, 9, 0),
-    ],
+    [datetime(1998, 12, 28, 9, 0), datetime(2004, 12, 27, 9, 0), datetime(2009, 12, 28, 9, 0)],
   );
 
   testRecurring(
@@ -1117,11 +911,7 @@ describe('RRule', () => {
       byeaster: 0,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 12, 9, 0),
-      datetime(1999, 4, 4, 9, 0),
-      datetime(2000, 4, 23, 9, 0),
-    ],
+    [datetime(1998, 4, 12, 9, 0), datetime(1999, 4, 4, 9, 0), datetime(2000, 4, 23, 9, 0)],
   );
 
   testRecurring(
@@ -1132,11 +922,7 @@ describe('RRule', () => {
       byeaster: 1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 13, 9, 0),
-      datetime(1999, 4, 5, 9, 0),
-      datetime(2000, 4, 24, 9, 0),
-    ],
+    [datetime(1998, 4, 13, 9, 0), datetime(1999, 4, 5, 9, 0), datetime(2000, 4, 24, 9, 0)],
   );
 
   testRecurring(
@@ -1147,11 +933,7 @@ describe('RRule', () => {
       byeaster: -1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 11, 9, 0),
-      datetime(1999, 4, 3, 9, 0),
-      datetime(2000, 4, 22, 9, 0),
-    ],
+    [datetime(1998, 4, 11, 9, 0), datetime(1999, 4, 3, 9, 0), datetime(2000, 4, 22, 9, 0)],
   );
 
   testRecurring(
@@ -1162,11 +944,7 @@ describe('RRule', () => {
       byhour: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0),
-      datetime(1997, 10, 2, 6, 0),
-      datetime(1997, 10, 2, 18, 0),
-    ],
+    [datetime(1997, 9, 2, 18, 0), datetime(1997, 10, 2, 6, 0), datetime(1997, 10, 2, 18, 0)],
   );
 
   testRecurring(
@@ -1177,11 +955,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6),
-      datetime(1997, 9, 2, 9, 18),
-      datetime(1997, 10, 2, 9, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6), datetime(1997, 9, 2, 9, 18), datetime(1997, 10, 2, 9, 6)],
   );
 
   testRecurring(
@@ -1192,11 +966,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 6),
-      datetime(1997, 9, 2, 9, 0, 18),
-      datetime(1997, 10, 2, 9, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 6), datetime(1997, 9, 2, 9, 0, 18), datetime(1997, 10, 2, 9, 0, 6)],
   );
 
   testRecurring(
@@ -1208,11 +978,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6),
-      datetime(1997, 9, 2, 18, 18),
-      datetime(1997, 10, 2, 6, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6), datetime(1997, 9, 2, 18, 18), datetime(1997, 10, 2, 6, 6)],
   );
 
   testRecurring(
@@ -1224,11 +990,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 6),
-      datetime(1997, 9, 2, 18, 0, 18),
-      datetime(1997, 10, 2, 6, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 6), datetime(1997, 9, 2, 18, 0, 18), datetime(1997, 10, 2, 6, 0, 6)],
   );
 
   testRecurring(
@@ -1240,11 +1002,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 6),
-      datetime(1997, 9, 2, 9, 6, 18),
-      datetime(1997, 9, 2, 9, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 6), datetime(1997, 9, 2, 9, 6, 18), datetime(1997, 9, 2, 9, 18, 6)],
   );
 
   testRecurring(
@@ -1257,11 +1015,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 6),
-      datetime(1997, 9, 2, 18, 6, 18),
-      datetime(1997, 9, 2, 18, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 6), datetime(1997, 9, 2, 18, 6, 18), datetime(1997, 9, 2, 18, 18, 6)],
   );
 
   testRecurring(
@@ -1274,11 +1028,7 @@ describe('RRule', () => {
       bysetpos: [3, -3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 13, 18, 0),
-      datetime(1997, 9, 17, 6, 0),
-      datetime(1997, 10, 13, 18, 0),
-    ],
+    [datetime(1997, 9, 13, 18, 0), datetime(1997, 9, 17, 6, 0), datetime(1997, 10, 13, 18, 0)],
   );
 
   testRecurring(
@@ -1320,11 +1070,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 9, 9, 0),
-      datetime(1997, 9, 16, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 9, 9, 0), datetime(1997, 9, 16, 9, 0)],
   );
 
   testRecurring(
@@ -1335,11 +1081,7 @@ describe('RRule', () => {
       interval: 2,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 16, 9, 0),
-      datetime(1997, 9, 30, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 16, 9, 0), datetime(1997, 9, 30, 9, 0)],
   );
 
   testRecurring(
@@ -1350,11 +1092,7 @@ describe('RRule', () => {
       interval: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1998, 1, 20, 9, 0),
-      datetime(1998, 6, 9, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1998, 1, 20, 9, 0), datetime(1998, 6, 9, 9, 0)],
   );
 
   testRecurring(
@@ -1365,11 +1103,7 @@ describe('RRule', () => {
       bymonth: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 13, 9, 0),
-      datetime(1998, 1, 20, 9, 0),
-    ],
+    [datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 13, 9, 0), datetime(1998, 1, 20, 9, 0)],
   );
 
   testRecurring(
@@ -1380,11 +1114,7 @@ describe('RRule', () => {
       bymonthday: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 10, 1, 9, 0),
-      datetime(1997, 10, 3, 9, 0),
-    ],
+    [datetime(1997, 9, 3, 9, 0), datetime(1997, 10, 1, 9, 0), datetime(1997, 10, 3, 9, 0)],
   );
 
   testRecurring(
@@ -1396,11 +1126,7 @@ describe('RRule', () => {
       bymonthday: [5, 7],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 5, 9, 0),
-      datetime(1998, 1, 7, 9, 0),
-      datetime(1998, 3, 5, 9, 0),
-    ],
+    [datetime(1998, 1, 5, 9, 0), datetime(1998, 1, 7, 9, 0), datetime(1998, 3, 5, 9, 0)],
   );
 
   testRecurring(
@@ -1411,11 +1137,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 9, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)],
   );
 
   testRecurring(
@@ -1426,11 +1148,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 9, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)],
   );
 
   testRecurring(
@@ -1445,11 +1163,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 8, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 8, 9, 0)],
   );
 
   testRecurring(
@@ -1461,11 +1175,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 8, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 8, 9, 0)],
   );
 
   testRecurring(
@@ -1477,11 +1187,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 2, 3, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 2, 3, 9, 0), datetime(1998, 3, 3, 9, 0)],
   );
 
   testRecurring(
@@ -1494,11 +1200,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-      datetime(2001, 3, 1, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 3, 3, 9, 0), datetime(2001, 3, 1, 9, 0)],
   );
 
   testRecurring(
@@ -1542,12 +1244,7 @@ describe('RRule', () => {
       byyearday: [1, 100, 200, 365],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 7, 19, 9, 0),
-      datetime(1999, 1, 1, 9, 0),
-      datetime(1999, 7, 19, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 7, 19, 9, 0), datetime(1999, 1, 1, 9, 0), datetime(1999, 7, 19, 9, 0)],
   );
 
   testRecurring(
@@ -1559,12 +1256,7 @@ describe('RRule', () => {
       byyearday: [-365, -266, -166, -1],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 7, 19, 9, 0),
-      datetime(1999, 1, 1, 9, 0),
-      datetime(1999, 7, 19, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 7, 19, 9, 0), datetime(1999, 1, 1, 9, 0), datetime(1999, 7, 19, 9, 0)],
   );
 
   testRecurring(
@@ -1575,11 +1267,7 @@ describe('RRule', () => {
       byweekno: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 5, 11, 9, 0),
-      datetime(1998, 5, 12, 9, 0),
-      datetime(1998, 5, 13, 9, 0),
-    ],
+    [datetime(1998, 5, 11, 9, 0), datetime(1998, 5, 12, 9, 0), datetime(1998, 5, 13, 9, 0)],
   );
 
   testRecurring(
@@ -1593,11 +1281,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 29, 9, 0),
-      datetime(1999, 1, 4, 9, 0),
-      datetime(2000, 1, 3, 9, 0),
-    ],
+    [datetime(1997, 12, 29, 9, 0), datetime(1999, 1, 4, 9, 0), datetime(2000, 1, 3, 9, 0)],
   );
 
   testRecurring(
@@ -1611,11 +1295,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1998, 12, 27, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1998, 12, 27, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -1627,11 +1307,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1999, 1, 3, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1999, 1, 3, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -1643,11 +1319,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 12, 28, 9, 0),
-      datetime(2004, 12, 27, 9, 0),
-      datetime(2009, 12, 28, 9, 0),
-    ],
+    [datetime(1998, 12, 28, 9, 0), datetime(2004, 12, 27, 9, 0), datetime(2009, 12, 28, 9, 0)],
   );
 
   testRecurring(
@@ -1658,11 +1330,7 @@ describe('RRule', () => {
       byeaster: 0,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 12, 9, 0),
-      datetime(1999, 4, 4, 9, 0),
-      datetime(2000, 4, 23, 9, 0),
-    ],
+    [datetime(1998, 4, 12, 9, 0), datetime(1999, 4, 4, 9, 0), datetime(2000, 4, 23, 9, 0)],
   );
 
   testRecurring(
@@ -1673,11 +1341,7 @@ describe('RRule', () => {
       byeaster: 1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 13, 9, 0),
-      datetime(1999, 4, 5, 9, 0),
-      datetime(2000, 4, 24, 9, 0),
-    ],
+    [datetime(1998, 4, 13, 9, 0), datetime(1999, 4, 5, 9, 0), datetime(2000, 4, 24, 9, 0)],
   );
 
   testRecurring(
@@ -1688,11 +1352,7 @@ describe('RRule', () => {
       byeaster: -1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 11, 9, 0),
-      datetime(1999, 4, 3, 9, 0),
-      datetime(2000, 4, 22, 9, 0),
-    ],
+    [datetime(1998, 4, 11, 9, 0), datetime(1999, 4, 3, 9, 0), datetime(2000, 4, 22, 9, 0)],
   );
 
   testRecurring(
@@ -1703,11 +1363,7 @@ describe('RRule', () => {
       byhour: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0),
-      datetime(1997, 9, 9, 6, 0),
-      datetime(1997, 9, 9, 18, 0),
-    ],
+    [datetime(1997, 9, 2, 18, 0), datetime(1997, 9, 9, 6, 0), datetime(1997, 9, 9, 18, 0)],
   );
 
   testRecurring(
@@ -1718,11 +1374,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6),
-      datetime(1997, 9, 2, 9, 18),
-      datetime(1997, 9, 9, 9, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6), datetime(1997, 9, 2, 9, 18), datetime(1997, 9, 9, 9, 6)],
   );
 
   testRecurring(
@@ -1733,11 +1385,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 6),
-      datetime(1997, 9, 2, 9, 0, 18),
-      datetime(1997, 9, 9, 9, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 6), datetime(1997, 9, 2, 9, 0, 18), datetime(1997, 9, 9, 9, 0, 6)],
   );
 
   testRecurring(
@@ -1749,11 +1397,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6),
-      datetime(1997, 9, 2, 18, 18),
-      datetime(1997, 9, 9, 6, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6), datetime(1997, 9, 2, 18, 18), datetime(1997, 9, 9, 6, 6)],
   );
 
   testRecurring(
@@ -1765,11 +1409,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 6),
-      datetime(1997, 9, 2, 18, 0, 18),
-      datetime(1997, 9, 9, 6, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 6), datetime(1997, 9, 2, 18, 0, 18), datetime(1997, 9, 9, 6, 0, 6)],
   );
 
   testRecurring(
@@ -1781,11 +1421,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 6),
-      datetime(1997, 9, 2, 9, 6, 18),
-      datetime(1997, 9, 2, 9, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 6), datetime(1997, 9, 2, 9, 6, 18), datetime(1997, 9, 2, 9, 18, 6)],
   );
 
   testRecurring(
@@ -1798,11 +1434,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 6),
-      datetime(1997, 9, 2, 18, 6, 18),
-      datetime(1997, 9, 2, 18, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 6), datetime(1997, 9, 2, 18, 6, 18), datetime(1997, 9, 2, 18, 18, 6)],
   );
 
   testRecurring(
@@ -1815,11 +1447,7 @@ describe('RRule', () => {
       bysetpos: [3, -3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0),
-      datetime(1997, 9, 4, 6, 0),
-      datetime(1997, 9, 9, 18, 0),
-    ],
+    [datetime(1997, 9, 2, 18, 0), datetime(1997, 9, 4, 6, 0), datetime(1997, 9, 9, 18, 0)],
   );
 
   testRecurring(
@@ -1829,11 +1457,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 3, 9, 0), datetime(1997, 9, 4, 9, 0)],
   );
 
   testRecurring(
@@ -1844,11 +1468,7 @@ describe('RRule', () => {
       interval: 2,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 6, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 6, 9, 0)],
   );
 
   testRecurring(
@@ -1859,11 +1479,7 @@ describe('RRule', () => {
       interval: 92,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 12, 3, 9, 0),
-      datetime(1998, 3, 5, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 12, 3, 9, 0), datetime(1998, 3, 5, 9, 0)],
   );
 
   testRecurring(
@@ -1874,11 +1490,7 @@ describe('RRule', () => {
       bymonth: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 1, 2, 9, 0),
-      datetime(1998, 1, 3, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 1, 2, 9, 0), datetime(1998, 1, 3, 9, 0)],
   );
 
   testRecurring(
@@ -1889,11 +1501,7 @@ describe('RRule', () => {
       bymonthday: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 10, 1, 9, 0),
-      datetime(1997, 10, 3, 9, 0),
-    ],
+    [datetime(1997, 9, 3, 9, 0), datetime(1997, 10, 1, 9, 0), datetime(1997, 10, 3, 9, 0)],
   );
 
   testRecurring(
@@ -1905,11 +1513,7 @@ describe('RRule', () => {
       bymonthday: [5, 7],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 5, 9, 0),
-      datetime(1998, 1, 7, 9, 0),
-      datetime(1998, 3, 5, 9, 0),
-    ],
+    [datetime(1998, 1, 5, 9, 0), datetime(1998, 1, 7, 9, 0), datetime(1998, 3, 5, 9, 0)],
   );
 
   testRecurring(
@@ -1920,11 +1524,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 9, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)],
   );
 
   testRecurring(
@@ -1935,11 +1535,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-      datetime(1997, 9, 9, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 4, 9, 0), datetime(1997, 9, 9, 9, 0)],
   );
 
   testRecurring(
@@ -1951,11 +1547,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 8, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 8, 9, 0)],
   );
 
   testRecurring(
@@ -1967,11 +1559,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 1, 6, 9, 0),
-      datetime(1998, 1, 8, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 1, 6, 9, 0), datetime(1998, 1, 8, 9, 0)],
   );
 
   testRecurring(
@@ -1983,11 +1571,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 2, 3, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 2, 3, 9, 0), datetime(1998, 3, 3, 9, 0)],
   );
 
   testRecurring(
@@ -2000,11 +1584,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 3, 3, 9, 0),
-      datetime(2001, 3, 1, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 3, 3, 9, 0), datetime(2001, 3, 1, 9, 0)],
   );
 
   testRecurring(
@@ -2048,12 +1628,7 @@ describe('RRule', () => {
       byyearday: [1, 100, 200, 365],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 7, 19, 9, 0),
-      datetime(1999, 1, 1, 9, 0),
-      datetime(1999, 7, 19, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 7, 19, 9, 0), datetime(1999, 1, 1, 9, 0), datetime(1999, 7, 19, 9, 0)],
   );
 
   testRecurring(
@@ -2065,12 +1640,7 @@ describe('RRule', () => {
       byyearday: [-365, -266, -166, -1],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 9, 0),
-      datetime(1998, 7, 19, 9, 0),
-      datetime(1999, 1, 1, 9, 0),
-      datetime(1999, 7, 19, 9, 0),
-    ],
+    [datetime(1998, 1, 1, 9, 0), datetime(1998, 7, 19, 9, 0), datetime(1999, 1, 1, 9, 0), datetime(1999, 7, 19, 9, 0)],
   );
 
   testRecurring(
@@ -2081,11 +1651,7 @@ describe('RRule', () => {
       byweekno: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 5, 11, 9, 0),
-      datetime(1998, 5, 12, 9, 0),
-      datetime(1998, 5, 13, 9, 0),
-    ],
+    [datetime(1998, 5, 11, 9, 0), datetime(1998, 5, 12, 9, 0), datetime(1998, 5, 13, 9, 0)],
   );
 
   testRecurring(
@@ -2099,11 +1665,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 29, 9, 0),
-      datetime(1999, 1, 4, 9, 0),
-      datetime(2000, 1, 3, 9, 0),
-    ],
+    [datetime(1997, 12, 29, 9, 0), datetime(1999, 1, 4, 9, 0), datetime(2000, 1, 3, 9, 0)],
   );
 
   testRecurring(
@@ -2117,11 +1679,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1998, 12, 27, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1998, 12, 27, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -2133,11 +1691,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 9, 0),
-      datetime(1999, 1, 3, 9, 0),
-      datetime(2000, 1, 2, 9, 0),
-    ],
+    [datetime(1997, 12, 28, 9, 0), datetime(1999, 1, 3, 9, 0), datetime(2000, 1, 2, 9, 0)],
   );
 
   testRecurring(
@@ -2149,11 +1703,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 12, 28, 9, 0),
-      datetime(2004, 12, 27, 9, 0),
-      datetime(2009, 12, 28, 9, 0),
-    ],
+    [datetime(1998, 12, 28, 9, 0), datetime(2004, 12, 27, 9, 0), datetime(2009, 12, 28, 9, 0)],
   );
 
   testRecurring(
@@ -2164,11 +1714,7 @@ describe('RRule', () => {
       byeaster: 0,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 12, 9, 0),
-      datetime(1999, 4, 4, 9, 0),
-      datetime(2000, 4, 23, 9, 0),
-    ],
+    [datetime(1998, 4, 12, 9, 0), datetime(1999, 4, 4, 9, 0), datetime(2000, 4, 23, 9, 0)],
   );
 
   testRecurring(
@@ -2179,11 +1725,7 @@ describe('RRule', () => {
       byeaster: 1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 13, 9, 0),
-      datetime(1999, 4, 5, 9, 0),
-      datetime(2000, 4, 24, 9, 0),
-    ],
+    [datetime(1998, 4, 13, 9, 0), datetime(1999, 4, 5, 9, 0), datetime(2000, 4, 24, 9, 0)],
   );
 
   testRecurring(
@@ -2194,11 +1736,7 @@ describe('RRule', () => {
       byeaster: -1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 11, 9, 0),
-      datetime(1999, 4, 3, 9, 0),
-      datetime(2000, 4, 22, 9, 0),
-    ],
+    [datetime(1998, 4, 11, 9, 0), datetime(1999, 4, 3, 9, 0), datetime(2000, 4, 22, 9, 0)],
   );
 
   testRecurring(
@@ -2209,11 +1747,7 @@ describe('RRule', () => {
       byhour: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0),
-      datetime(1997, 9, 3, 6, 0),
-      datetime(1997, 9, 3, 18, 0),
-    ],
+    [datetime(1997, 9, 2, 18, 0), datetime(1997, 9, 3, 6, 0), datetime(1997, 9, 3, 18, 0)],
   );
 
   testRecurring(
@@ -2224,11 +1758,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6),
-      datetime(1997, 9, 2, 9, 18),
-      datetime(1997, 9, 3, 9, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6), datetime(1997, 9, 2, 9, 18), datetime(1997, 9, 3, 9, 6)],
   );
 
   testRecurring(
@@ -2239,11 +1769,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 6),
-      datetime(1997, 9, 2, 9, 0, 18),
-      datetime(1997, 9, 3, 9, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 6), datetime(1997, 9, 2, 9, 0, 18), datetime(1997, 9, 3, 9, 0, 6)],
   );
 
   testRecurring(
@@ -2255,11 +1781,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6),
-      datetime(1997, 9, 2, 18, 18),
-      datetime(1997, 9, 3, 6, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6), datetime(1997, 9, 2, 18, 18), datetime(1997, 9, 3, 6, 6)],
   );
 
   testRecurring(
@@ -2271,11 +1793,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 6),
-      datetime(1997, 9, 2, 18, 0, 18),
-      datetime(1997, 9, 3, 6, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 6), datetime(1997, 9, 2, 18, 0, 18), datetime(1997, 9, 3, 6, 0, 6)],
   );
 
   testRecurring(
@@ -2287,11 +1805,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 6),
-      datetime(1997, 9, 2, 9, 6, 18),
-      datetime(1997, 9, 2, 9, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 6), datetime(1997, 9, 2, 9, 6, 18), datetime(1997, 9, 2, 9, 18, 6)],
   );
 
   testRecurring(
@@ -2304,11 +1818,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 6),
-      datetime(1997, 9, 2, 18, 6, 18),
-      datetime(1997, 9, 2, 18, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 6), datetime(1997, 9, 2, 18, 6, 18), datetime(1997, 9, 2, 18, 18, 6)],
   );
 
   testRecurring(
@@ -2321,11 +1831,7 @@ describe('RRule', () => {
       bysetpos: [3, -3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 15),
-      datetime(1997, 9, 3, 6, 45),
-      datetime(1997, 9, 3, 18, 15),
-    ],
+    [datetime(1997, 9, 2, 18, 15), datetime(1997, 9, 3, 6, 45), datetime(1997, 9, 3, 18, 15)],
   );
 
   testRecurring(
@@ -2335,11 +1841,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 10, 0),
-      datetime(1997, 9, 2, 11, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 10, 0), datetime(1997, 9, 2, 11, 0)],
   );
 
   testRecurring(
@@ -2350,11 +1852,7 @@ describe('RRule', () => {
       interval: 2,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 11, 0),
-      datetime(1997, 9, 2, 13, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 11, 0), datetime(1997, 9, 2, 13, 0)],
   );
 
   testRecurring(
@@ -2365,11 +1863,7 @@ describe('RRule', () => {
       interval: 769,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 10, 4, 10, 0),
-      datetime(1997, 11, 5, 11, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 10, 4, 10, 0), datetime(1997, 11, 5, 11, 0)],
   );
 
   testRecurring(
@@ -2380,11 +1874,7 @@ describe('RRule', () => {
       bymonth: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 1, 0),
-      datetime(1998, 1, 1, 2, 0),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 1, 0), datetime(1998, 1, 1, 2, 0)],
   );
 
   testRecurring(
@@ -2395,11 +1885,7 @@ describe('RRule', () => {
       bymonthday: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 3, 0, 0),
-      datetime(1997, 9, 3, 1, 0),
-      datetime(1997, 9, 3, 2, 0),
-    ],
+    [datetime(1997, 9, 3, 0, 0), datetime(1997, 9, 3, 1, 0), datetime(1997, 9, 3, 2, 0)],
   );
 
   testRecurring(
@@ -2411,11 +1897,7 @@ describe('RRule', () => {
       bymonthday: [5, 7],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 5, 0, 0),
-      datetime(1998, 1, 5, 1, 0),
-      datetime(1998, 1, 5, 2, 0),
-    ],
+    [datetime(1998, 1, 5, 0, 0), datetime(1998, 1, 5, 1, 0), datetime(1998, 1, 5, 2, 0)],
   );
 
   testRecurring(
@@ -2426,11 +1908,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 10, 0),
-      datetime(1997, 9, 2, 11, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 10, 0), datetime(1997, 9, 2, 11, 0)],
   );
 
   testRecurring(
@@ -2441,11 +1919,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 10, 0),
-      datetime(1997, 9, 2, 11, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 10, 0), datetime(1997, 9, 2, 11, 0)],
   );
 
   testRecurring(
@@ -2457,11 +1931,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 1, 0),
-      datetime(1998, 1, 1, 2, 0),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 1, 0), datetime(1998, 1, 1, 2, 0)],
   );
 
   testRecurring(
@@ -2473,11 +1943,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 1, 0),
-      datetime(1998, 1, 1, 2, 0),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 1, 0), datetime(1998, 1, 1, 2, 0)],
   );
 
   testRecurring(
@@ -2489,11 +1955,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 1, 0),
-      datetime(1998, 1, 1, 2, 0),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 1, 0), datetime(1998, 1, 1, 2, 0)],
   );
 
   testRecurring(
@@ -2506,11 +1968,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 1, 0),
-      datetime(1998, 1, 1, 2, 0),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 1, 0), datetime(1998, 1, 1, 2, 0)],
   );
 
   testRecurring(
@@ -2587,11 +2045,7 @@ describe('RRule', () => {
       byweekno: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 5, 11, 0, 0),
-      datetime(1998, 5, 11, 1, 0),
-      datetime(1998, 5, 11, 2, 0),
-    ],
+    [datetime(1998, 5, 11, 0, 0), datetime(1998, 5, 11, 1, 0), datetime(1998, 5, 11, 2, 0)],
   );
 
   testRecurring(
@@ -2603,11 +2057,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 29, 0, 0),
-      datetime(1997, 12, 29, 1, 0),
-      datetime(1997, 12, 29, 2, 0),
-    ],
+    [datetime(1997, 12, 29, 0, 0), datetime(1997, 12, 29, 1, 0), datetime(1997, 12, 29, 2, 0)],
   );
 
   testRecurring(
@@ -2619,11 +2069,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 0, 0),
-      datetime(1997, 12, 28, 1, 0),
-      datetime(1997, 12, 28, 2, 0),
-    ],
+    [datetime(1997, 12, 28, 0, 0), datetime(1997, 12, 28, 1, 0), datetime(1997, 12, 28, 2, 0)],
   );
 
   testRecurring(
@@ -2635,11 +2081,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 0, 0),
-      datetime(1997, 12, 28, 1, 0),
-      datetime(1997, 12, 28, 2, 0),
-    ],
+    [datetime(1997, 12, 28, 0, 0), datetime(1997, 12, 28, 1, 0), datetime(1997, 12, 28, 2, 0)],
   );
 
   testRecurring(
@@ -2651,11 +2093,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 12, 28, 0, 0),
-      datetime(1998, 12, 28, 1, 0),
-      datetime(1998, 12, 28, 2, 0),
-    ],
+    [datetime(1998, 12, 28, 0, 0), datetime(1998, 12, 28, 1, 0), datetime(1998, 12, 28, 2, 0)],
   );
 
   testRecurring.skip(
@@ -2666,11 +2104,7 @@ describe('RRule', () => {
       byeaster: 0,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 12, 0, 0),
-      datetime(1998, 4, 12, 1, 0),
-      datetime(1998, 4, 12, 2, 0),
-    ],
+    [datetime(1998, 4, 12, 0, 0), datetime(1998, 4, 12, 1, 0), datetime(1998, 4, 12, 2, 0)],
   );
 
   testRecurring.skip(
@@ -2681,11 +2115,7 @@ describe('RRule', () => {
       byeaster: 1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 13, 0, 0),
-      datetime(1998, 4, 13, 1, 0),
-      datetime(1998, 4, 13, 2, 0),
-    ],
+    [datetime(1998, 4, 13, 0, 0), datetime(1998, 4, 13, 1, 0), datetime(1998, 4, 13, 2, 0)],
   );
 
   testRecurring.skip(
@@ -2696,11 +2126,7 @@ describe('RRule', () => {
       byeaster: -1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 11, 0, 0),
-      datetime(1998, 4, 11, 1, 0),
-      datetime(1998, 4, 11, 2, 0),
-    ],
+    [datetime(1998, 4, 11, 0, 0), datetime(1998, 4, 11, 1, 0), datetime(1998, 4, 11, 2, 0)],
   );
 
   testRecurring(
@@ -2711,11 +2137,7 @@ describe('RRule', () => {
       byhour: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0),
-      datetime(1997, 9, 3, 6, 0),
-      datetime(1997, 9, 3, 18, 0),
-    ],
+    [datetime(1997, 9, 2, 18, 0), datetime(1997, 9, 3, 6, 0), datetime(1997, 9, 3, 18, 0)],
   );
 
   testRecurring(
@@ -2726,11 +2148,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6),
-      datetime(1997, 9, 2, 9, 18),
-      datetime(1997, 9, 2, 10, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6), datetime(1997, 9, 2, 9, 18), datetime(1997, 9, 2, 10, 6)],
   );
 
   testRecurring(
@@ -2741,11 +2159,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 6),
-      datetime(1997, 9, 2, 9, 0, 18),
-      datetime(1997, 9, 2, 10, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 6), datetime(1997, 9, 2, 9, 0, 18), datetime(1997, 9, 2, 10, 0, 6)],
   );
 
   testRecurring(
@@ -2757,11 +2171,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6),
-      datetime(1997, 9, 2, 18, 18),
-      datetime(1997, 9, 3, 6, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6), datetime(1997, 9, 2, 18, 18), datetime(1997, 9, 3, 6, 6)],
   );
 
   testRecurring(
@@ -2773,11 +2183,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 6),
-      datetime(1997, 9, 2, 18, 0, 18),
-      datetime(1997, 9, 3, 6, 0, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 6), datetime(1997, 9, 2, 18, 0, 18), datetime(1997, 9, 3, 6, 0, 6)],
   );
 
   testRecurring(
@@ -2789,11 +2195,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 6),
-      datetime(1997, 9, 2, 9, 6, 18),
-      datetime(1997, 9, 2, 9, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 6), datetime(1997, 9, 2, 9, 6, 18), datetime(1997, 9, 2, 9, 18, 6)],
   );
 
   testRecurring(
@@ -2806,11 +2208,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 6),
-      datetime(1997, 9, 2, 18, 6, 18),
-      datetime(1997, 9, 2, 18, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 6), datetime(1997, 9, 2, 18, 6, 18), datetime(1997, 9, 2, 18, 18, 6)],
   );
 
   testRecurring(
@@ -2823,11 +2221,7 @@ describe('RRule', () => {
       bysetpos: [3, -3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 15, 45),
-      datetime(1997, 9, 2, 9, 45, 15),
-      datetime(1997, 9, 2, 10, 15, 45),
-    ],
+    [datetime(1997, 9, 2, 9, 15, 45), datetime(1997, 9, 2, 9, 45, 15), datetime(1997, 9, 2, 10, 15, 45)],
   );
 
   testRecurring(
@@ -2837,11 +2231,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 9, 1),
-      datetime(1997, 9, 2, 9, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 9, 1), datetime(1997, 9, 2, 9, 2)],
   );
 
   testRecurring(
@@ -2852,11 +2242,7 @@ describe('RRule', () => {
       interval: 2,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 9, 2),
-      datetime(1997, 9, 2, 9, 4),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 9, 2), datetime(1997, 9, 2, 9, 4)],
   );
 
   testRecurring(
@@ -2867,11 +2253,7 @@ describe('RRule', () => {
       interval: 1501,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 3, 10, 1),
-      datetime(1997, 9, 4, 11, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 3, 10, 1), datetime(1997, 9, 4, 11, 2)],
   );
 
   testRecurring(
@@ -2882,11 +2264,7 @@ describe('RRule', () => {
       bymonth: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 0, 1),
-      datetime(1998, 1, 1, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 0, 1), datetime(1998, 1, 1, 0, 2)],
   );
 
   testRecurring(
@@ -2897,11 +2275,7 @@ describe('RRule', () => {
       bymonthday: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 3, 0, 0),
-      datetime(1997, 9, 3, 0, 1),
-      datetime(1997, 9, 3, 0, 2),
-    ],
+    [datetime(1997, 9, 3, 0, 0), datetime(1997, 9, 3, 0, 1), datetime(1997, 9, 3, 0, 2)],
   );
 
   testRecurring(
@@ -2913,11 +2287,7 @@ describe('RRule', () => {
       bymonthday: [5, 7],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 5, 0, 0),
-      datetime(1998, 1, 5, 0, 1),
-      datetime(1998, 1, 5, 0, 2),
-    ],
+    [datetime(1998, 1, 5, 0, 0), datetime(1998, 1, 5, 0, 1), datetime(1998, 1, 5, 0, 2)],
   );
 
   testRecurring(
@@ -2928,11 +2298,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 9, 1),
-      datetime(1997, 9, 2, 9, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 9, 1), datetime(1997, 9, 2, 9, 2)],
   );
 
   testRecurring(
@@ -2943,11 +2309,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 2, 9, 1),
-      datetime(1997, 9, 2, 9, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 2, 9, 1), datetime(1997, 9, 2, 9, 2)],
   );
 
   testRecurring(
@@ -2959,11 +2321,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 0, 1),
-      datetime(1998, 1, 1, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 0, 1), datetime(1998, 1, 1, 0, 2)],
   );
 
   testRecurring(
@@ -2975,11 +2333,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 0, 1),
-      datetime(1998, 1, 1, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 0, 1), datetime(1998, 1, 1, 0, 2)],
   );
 
   testRecurring(
@@ -2991,11 +2345,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 0, 1),
-      datetime(1998, 1, 1, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 0, 1), datetime(1998, 1, 1, 0, 2)],
   );
 
   testRecurring(
@@ -3008,11 +2358,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0),
-      datetime(1998, 1, 1, 0, 1),
-      datetime(1998, 1, 1, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0), datetime(1998, 1, 1, 0, 1), datetime(1998, 1, 1, 0, 2)],
   );
 
   testRecurring(
@@ -3089,11 +2435,7 @@ describe('RRule', () => {
       byweekno: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 5, 11, 0, 0),
-      datetime(1998, 5, 11, 0, 1),
-      datetime(1998, 5, 11, 0, 2),
-    ],
+    [datetime(1998, 5, 11, 0, 0), datetime(1998, 5, 11, 0, 1), datetime(1998, 5, 11, 0, 2)],
   );
 
   testRecurring(
@@ -3105,11 +2447,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 29, 0, 0),
-      datetime(1997, 12, 29, 0, 1),
-      datetime(1997, 12, 29, 0, 2),
-    ],
+    [datetime(1997, 12, 29, 0, 0), datetime(1997, 12, 29, 0, 1), datetime(1997, 12, 29, 0, 2)],
   );
 
   testRecurring(
@@ -3121,11 +2459,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 0, 0),
-      datetime(1997, 12, 28, 0, 1),
-      datetime(1997, 12, 28, 0, 2),
-    ],
+    [datetime(1997, 12, 28, 0, 0), datetime(1997, 12, 28, 0, 1), datetime(1997, 12, 28, 0, 2)],
   );
 
   testRecurring(
@@ -3137,11 +2471,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 0, 0),
-      datetime(1997, 12, 28, 0, 1),
-      datetime(1997, 12, 28, 0, 2),
-    ],
+    [datetime(1997, 12, 28, 0, 0), datetime(1997, 12, 28, 0, 1), datetime(1997, 12, 28, 0, 2)],
   );
 
   testRecurring(
@@ -3153,11 +2483,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 12, 28, 0, 0),
-      datetime(1998, 12, 28, 0, 1),
-      datetime(1998, 12, 28, 0, 2),
-    ],
+    [datetime(1998, 12, 28, 0, 0), datetime(1998, 12, 28, 0, 1), datetime(1998, 12, 28, 0, 2)],
   );
 
   testRecurring.skip(
@@ -3168,11 +2494,7 @@ describe('RRule', () => {
       byeaster: 0,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 12, 0, 0),
-      datetime(1998, 4, 12, 0, 1),
-      datetime(1998, 4, 12, 0, 2),
-    ],
+    [datetime(1998, 4, 12, 0, 0), datetime(1998, 4, 12, 0, 1), datetime(1998, 4, 12, 0, 2)],
   );
 
   testRecurring.skip(
@@ -3183,11 +2505,7 @@ describe('RRule', () => {
       byeaster: 1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 13, 0, 0),
-      datetime(1998, 4, 13, 0, 1),
-      datetime(1998, 4, 13, 0, 2),
-    ],
+    [datetime(1998, 4, 13, 0, 0), datetime(1998, 4, 13, 0, 1), datetime(1998, 4, 13, 0, 2)],
   );
 
   testRecurring.skip(
@@ -3198,11 +2516,7 @@ describe('RRule', () => {
       byeaster: -1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 11, 0, 0),
-      datetime(1998, 4, 11, 0, 1),
-      datetime(1998, 4, 11, 0, 2),
-    ],
+    [datetime(1998, 4, 11, 0, 0), datetime(1998, 4, 11, 0, 1), datetime(1998, 4, 11, 0, 2)],
   );
 
   testRecurring(
@@ -3213,11 +2527,7 @@ describe('RRule', () => {
       byhour: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0),
-      datetime(1997, 9, 2, 18, 1),
-      datetime(1997, 9, 2, 18, 2),
-    ],
+    [datetime(1997, 9, 2, 18, 0), datetime(1997, 9, 2, 18, 1), datetime(1997, 9, 2, 18, 2)],
   );
 
   testRecurring(
@@ -3228,11 +2538,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6),
-      datetime(1997, 9, 2, 9, 18),
-      datetime(1997, 9, 2, 10, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6), datetime(1997, 9, 2, 9, 18), datetime(1997, 9, 2, 10, 6)],
   );
 
   testRecurring(
@@ -3243,11 +2549,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 6),
-      datetime(1997, 9, 2, 9, 0, 18),
-      datetime(1997, 9, 2, 9, 1, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 6), datetime(1997, 9, 2, 9, 0, 18), datetime(1997, 9, 2, 9, 1, 6)],
   );
 
   testRecurring(
@@ -3259,11 +2561,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6),
-      datetime(1997, 9, 2, 18, 18),
-      datetime(1997, 9, 3, 6, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6), datetime(1997, 9, 2, 18, 18), datetime(1997, 9, 3, 6, 6)],
   );
 
   testRecurring(
@@ -3275,11 +2573,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 6),
-      datetime(1997, 9, 2, 18, 0, 18),
-      datetime(1997, 9, 2, 18, 1, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 6), datetime(1997, 9, 2, 18, 0, 18), datetime(1997, 9, 2, 18, 1, 6)],
   );
 
   testRecurring(
@@ -3291,11 +2585,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 6),
-      datetime(1997, 9, 2, 9, 6, 18),
-      datetime(1997, 9, 2, 9, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 6), datetime(1997, 9, 2, 9, 6, 18), datetime(1997, 9, 2, 9, 18, 6)],
   );
 
   testRecurring(
@@ -3308,11 +2598,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 6),
-      datetime(1997, 9, 2, 18, 6, 18),
-      datetime(1997, 9, 2, 18, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 6), datetime(1997, 9, 2, 18, 6, 18), datetime(1997, 9, 2, 18, 18, 6)],
   );
 
   testRecurring(
@@ -3324,11 +2610,7 @@ describe('RRule', () => {
       bysetpos: [3, -3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 15),
-      datetime(1997, 9, 2, 9, 0, 45),
-      datetime(1997, 9, 2, 9, 1, 15),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 15), datetime(1997, 9, 2, 9, 0, 45), datetime(1997, 9, 2, 9, 1, 15)],
   );
 
   testRecurring(
@@ -3338,11 +2620,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 0),
-      datetime(1997, 9, 2, 9, 0, 1),
-      datetime(1997, 9, 2, 9, 0, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 0), datetime(1997, 9, 2, 9, 0, 1), datetime(1997, 9, 2, 9, 0, 2)],
   );
 
   testRecurring(
@@ -3353,11 +2631,7 @@ describe('RRule', () => {
       interval: 2,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 0),
-      datetime(1997, 9, 2, 9, 0, 2),
-      datetime(1997, 9, 2, 9, 0, 4),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 0), datetime(1997, 9, 2, 9, 0, 2), datetime(1997, 9, 2, 9, 0, 4)],
   );
 
   testRecurring(
@@ -3368,11 +2642,7 @@ describe('RRule', () => {
       interval: 90061,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 0),
-      datetime(1997, 9, 3, 10, 1, 1),
-      datetime(1997, 9, 4, 11, 2, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 0), datetime(1997, 9, 3, 10, 1, 1), datetime(1997, 9, 4, 11, 2, 2)],
   );
 
   testRecurring(
@@ -3383,11 +2653,7 @@ describe('RRule', () => {
       bymonth: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0, 0),
-      datetime(1998, 1, 1, 0, 0, 1),
-      datetime(1998, 1, 1, 0, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0, 0), datetime(1998, 1, 1, 0, 0, 1), datetime(1998, 1, 1, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3398,11 +2664,7 @@ describe('RRule', () => {
       bymonthday: [1, 3],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 3, 0, 0, 0),
-      datetime(1997, 9, 3, 0, 0, 1),
-      datetime(1997, 9, 3, 0, 0, 2),
-    ],
+    [datetime(1997, 9, 3, 0, 0, 0), datetime(1997, 9, 3, 0, 0, 1), datetime(1997, 9, 3, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3414,11 +2676,7 @@ describe('RRule', () => {
       bymonthday: [5, 7],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 5, 0, 0, 0),
-      datetime(1998, 1, 5, 0, 0, 1),
-      datetime(1998, 1, 5, 0, 0, 2),
-    ],
+    [datetime(1998, 1, 5, 0, 0, 0), datetime(1998, 1, 5, 0, 0, 1), datetime(1998, 1, 5, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3429,11 +2687,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 0),
-      datetime(1997, 9, 2, 9, 0, 1),
-      datetime(1997, 9, 2, 9, 0, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 0), datetime(1997, 9, 2, 9, 0, 1), datetime(1997, 9, 2, 9, 0, 2)],
   );
 
   testRecurring(
@@ -3444,11 +2698,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 0),
-      datetime(1997, 9, 2, 9, 0, 1),
-      datetime(1997, 9, 2, 9, 0, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 0), datetime(1997, 9, 2, 9, 0, 1), datetime(1997, 9, 2, 9, 0, 2)],
   );
 
   testRecurring(
@@ -3460,11 +2710,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0, 0),
-      datetime(1998, 1, 1, 0, 0, 1),
-      datetime(1998, 1, 1, 0, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0, 0), datetime(1998, 1, 1, 0, 0, 1), datetime(1998, 1, 1, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3476,11 +2722,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU.nth(1), RRule.TH.nth(-1)],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0, 0),
-      datetime(1998, 1, 1, 0, 0, 1),
-      datetime(1998, 1, 1, 0, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0, 0), datetime(1998, 1, 1, 0, 0, 1), datetime(1998, 1, 1, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3492,11 +2734,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0, 0),
-      datetime(1998, 1, 1, 0, 0, 1),
-      datetime(1998, 1, 1, 0, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0, 0), datetime(1998, 1, 1, 0, 0, 1), datetime(1998, 1, 1, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3509,11 +2747,7 @@ describe('RRule', () => {
       byweekday: [RRule.TU, RRule.TH],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 1, 1, 0, 0, 0),
-      datetime(1998, 1, 1, 0, 0, 1),
-      datetime(1998, 1, 1, 0, 0, 2),
-    ],
+    [datetime(1998, 1, 1, 0, 0, 0), datetime(1998, 1, 1, 0, 0, 1), datetime(1998, 1, 1, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3590,11 +2824,7 @@ describe('RRule', () => {
       byweekno: 20,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 5, 11, 0, 0, 0),
-      datetime(1998, 5, 11, 0, 0, 1),
-      datetime(1998, 5, 11, 0, 0, 2),
-    ],
+    [datetime(1998, 5, 11, 0, 0, 0), datetime(1998, 5, 11, 0, 0, 1), datetime(1998, 5, 11, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3606,11 +2836,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 29, 0, 0, 0),
-      datetime(1997, 12, 29, 0, 0, 1),
-      datetime(1997, 12, 29, 0, 0, 2),
-    ],
+    [datetime(1997, 12, 29, 0, 0, 0), datetime(1997, 12, 29, 0, 0, 1), datetime(1997, 12, 29, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3622,11 +2848,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 0, 0, 0),
-      datetime(1997, 12, 28, 0, 0, 1),
-      datetime(1997, 12, 28, 0, 0, 2),
-    ],
+    [datetime(1997, 12, 28, 0, 0, 0), datetime(1997, 12, 28, 0, 0, 1), datetime(1997, 12, 28, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3638,11 +2860,7 @@ describe('RRule', () => {
       byweekday: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 12, 28, 0, 0, 0),
-      datetime(1997, 12, 28, 0, 0, 1),
-      datetime(1997, 12, 28, 0, 0, 2),
-    ],
+    [datetime(1997, 12, 28, 0, 0, 0), datetime(1997, 12, 28, 0, 0, 1), datetime(1997, 12, 28, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3654,11 +2872,7 @@ describe('RRule', () => {
       byweekday: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 12, 28, 0, 0, 0),
-      datetime(1998, 12, 28, 0, 0, 1),
-      datetime(1998, 12, 28, 0, 0, 2),
-    ],
+    [datetime(1998, 12, 28, 0, 0, 0), datetime(1998, 12, 28, 0, 0, 1), datetime(1998, 12, 28, 0, 0, 2)],
   );
 
   testRecurring.skip(
@@ -3669,11 +2883,7 @@ describe('RRule', () => {
       byeaster: 0,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 12, 0, 0, 0),
-      datetime(1998, 4, 12, 0, 0, 1),
-      datetime(1998, 4, 12, 0, 0, 2),
-    ],
+    [datetime(1998, 4, 12, 0, 0, 0), datetime(1998, 4, 12, 0, 0, 1), datetime(1998, 4, 12, 0, 0, 2)],
   );
 
   testRecurring.skip(
@@ -3684,11 +2894,7 @@ describe('RRule', () => {
       byeaster: 1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 13, 0, 0, 0),
-      datetime(1998, 4, 13, 0, 0, 1),
-      datetime(1998, 4, 13, 0, 0, 2),
-    ],
+    [datetime(1998, 4, 13, 0, 0, 0), datetime(1998, 4, 13, 0, 0, 1), datetime(1998, 4, 13, 0, 0, 2)],
   );
 
   testRecurring.skip(
@@ -3699,11 +2905,7 @@ describe('RRule', () => {
       byeaster: -1,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1998, 4, 11, 0, 0, 0),
-      datetime(1998, 4, 11, 0, 0, 1),
-      datetime(1998, 4, 11, 0, 0, 2),
-    ],
+    [datetime(1998, 4, 11, 0, 0, 0), datetime(1998, 4, 11, 0, 0, 1), datetime(1998, 4, 11, 0, 0, 2)],
   );
 
   testRecurring(
@@ -3714,11 +2916,7 @@ describe('RRule', () => {
       byhour: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 0),
-      datetime(1997, 9, 2, 18, 0, 1),
-      datetime(1997, 9, 2, 18, 0, 2),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 0), datetime(1997, 9, 2, 18, 0, 1), datetime(1997, 9, 2, 18, 0, 2)],
   );
 
   testRecurring(
@@ -3729,11 +2927,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 0),
-      datetime(1997, 9, 2, 9, 6, 1),
-      datetime(1997, 9, 2, 9, 6, 2),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 0), datetime(1997, 9, 2, 9, 6, 1), datetime(1997, 9, 2, 9, 6, 2)],
   );
 
   testRecurring(
@@ -3744,11 +2938,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0, 6),
-      datetime(1997, 9, 2, 9, 0, 18),
-      datetime(1997, 9, 2, 9, 1, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 0, 6), datetime(1997, 9, 2, 9, 0, 18), datetime(1997, 9, 2, 9, 1, 6)],
   );
 
   testRecurring(
@@ -3760,11 +2950,7 @@ describe('RRule', () => {
       byminute: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 0),
-      datetime(1997, 9, 2, 18, 6, 1),
-      datetime(1997, 9, 2, 18, 6, 2),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 0), datetime(1997, 9, 2, 18, 6, 1), datetime(1997, 9, 2, 18, 6, 2)],
   );
 
   testRecurring(
@@ -3776,11 +2962,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 0, 6),
-      datetime(1997, 9, 2, 18, 0, 18),
-      datetime(1997, 9, 2, 18, 1, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 0, 6), datetime(1997, 9, 2, 18, 0, 18), datetime(1997, 9, 2, 18, 1, 6)],
   );
 
   testRecurring(
@@ -3792,11 +2974,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 6, 6),
-      datetime(1997, 9, 2, 9, 6, 18),
-      datetime(1997, 9, 2, 9, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 9, 6, 6), datetime(1997, 9, 2, 9, 6, 18), datetime(1997, 9, 2, 9, 18, 6)],
   );
 
   testRecurring(
@@ -3809,11 +2987,7 @@ describe('RRule', () => {
       bysecond: [6, 18],
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 18, 6, 6),
-      datetime(1997, 9, 2, 18, 6, 18),
-      datetime(1997, 9, 2, 18, 18, 6),
-    ],
+    [datetime(1997, 9, 2, 18, 6, 6), datetime(1997, 9, 2, 18, 6, 18), datetime(1997, 9, 2, 18, 18, 6)],
   );
 
   testRecurring(
@@ -3824,11 +2998,7 @@ describe('RRule', () => {
       dtstart: parse('19970902T090000'),
       until: parse('19970905T080000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 3, 9, 0), datetime(1997, 9, 4, 9, 0)],
   );
 
   testRecurring(
@@ -3839,11 +3009,7 @@ describe('RRule', () => {
       dtstart: parse('19970902T090000'),
       until: parse('19970904T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 3, 9, 0), datetime(1997, 9, 4, 9, 0)],
   );
 
   testRecurring(
@@ -3876,11 +3042,7 @@ describe('RRule', () => {
       dtstart: parse('19970902T090000'),
       until: datetime(1997, 9, 5),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 3, 9, 0), datetime(1997, 9, 4, 9, 0)],
   );
 
   testRecurring(
@@ -3893,11 +3055,7 @@ describe('RRule', () => {
       wkst: RRule.MO,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 7, 9, 0),
-      datetime(1997, 9, 16, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 7, 9, 0), datetime(1997, 9, 16, 9, 0)],
   );
 
   testRecurring(
@@ -3910,22 +3068,14 @@ describe('RRule', () => {
       wkst: RRule.SU,
       dtstart: parse('19970902T090000'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 14, 9, 0),
-      datetime(1997, 9, 16, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 14, 9, 0), datetime(1997, 9, 16, 9, 0)],
   );
 
-  testRecurring(
-    'testDTStartIsDate',
-    new RRule({ freq: RRule.DAILY, count: 3, dtstart: datetime(1997, 9, 2) }),
-    [
-      datetime(1997, 9, 2, 0, 0),
-      datetime(1997, 9, 3, 0, 0),
-      datetime(1997, 9, 4, 0, 0),
-    ],
-  );
+  testRecurring('testDTStartIsDate', new RRule({ freq: RRule.DAILY, count: 3, dtstart: datetime(1997, 9, 2) }), [
+    datetime(1997, 9, 2, 0, 0),
+    datetime(1997, 9, 3, 0, 0),
+    datetime(1997, 9, 4, 0, 0),
+  ]);
 
   testRecurring(
     'testDTStartWithMicroseconds',
@@ -3934,11 +3084,7 @@ describe('RRule', () => {
       count: 3,
       dtstart: parse('19970902T090000.5'),
     }),
-    [
-      datetime(1997, 9, 2, 9, 0),
-      datetime(1997, 9, 3, 9, 0),
-      datetime(1997, 9, 4, 9, 0),
-    ],
+    [datetime(1997, 9, 2, 9, 0), datetime(1997, 9, 3, 9, 0), datetime(1997, 9, 4, 9, 0)],
   );
 
   testRecurring(
@@ -3975,22 +3121,22 @@ describe('RRule', () => {
   );
 
   it('testAfterBefore', () => {
-    (
-      ['YEARLY', 'MONTHLY', 'DAILY', 'HOURLY', 'MINUTELY', 'SECONDLY'] as const
-    ).forEach((freqStr: keyof typeof Frequency) => {
-      const date = new Date(1356991200001);
-      const rr = new RRule({
-        freq: RRule[freqStr],
-        dtstart: date,
-      });
+    (['YEARLY', 'MONTHLY', 'DAILY', 'HOURLY', 'MINUTELY', 'SECONDLY'] as const).forEach(
+      (freqStr: keyof typeof Frequency) => {
+        const date = new Date(1356991200001);
+        const rr = new RRule({
+          freq: RRule[freqStr],
+          dtstart: date,
+        });
 
-      expect(date.getTime()).toBe(rr.options.dtstart.getTime());
-      const res: Date = rr.before(rr.after(rr.options.dtstart));
+        expect(date.getTime()).toBe(rr.options.dtstart.getTime());
+        const res: Date = rr.before(rr.after(rr.options.dtstart));
 
-      let resTimestamp: number;
-      if (res != null) resTimestamp = res.getTime();
-      expect(resTimestamp).toBe(rr.options.dtstart.getTime());
-    });
+        let resTimestamp: number;
+        if (res != null) resTimestamp = res.getTime();
+        expect(resTimestamp).toBe(rr.options.dtstart.getTime());
+      },
+    );
   });
 
   it('testConvertAndBack', () => {
@@ -4001,15 +3147,7 @@ describe('RRule', () => {
         freq: RRule.MONTHLY,
         interval: 1,
         bysetpos: 17,
-        byweekday: [
-          RRule.SU,
-          RRule.MO,
-          RRule.TU,
-          RRule.WE,
-          RRule.TH,
-          RRule.FR,
-          RRule.SA,
-        ],
+        byweekday: [RRule.SU, RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR, RRule.SA],
         wkst: wkst,
         byhour: 11,
         byminute: 0,
@@ -4044,9 +3182,7 @@ describe('RRule', () => {
   });
 
   it('calculates daily recurrences correctly across DST boundaries', () => {
-    const rrule = RRule.fromString(
-      'DTSTART=20181101T110000Z;UNTIL=20181106T110000Z;FREQ=DAILY',
-    );
+    const rrule = RRule.fromString('DTSTART=20181101T110000Z;UNTIL=20181106T110000Z;FREQ=DAILY');
     expect(rrule.all()).toEqual([
       new Date('2018-11-01T11:00:00.000Z'),
       new Date('2018-11-02T11:00:00.000Z'),
@@ -4058,9 +3194,7 @@ describe('RRule', () => {
   });
 
   it('calculates weekly recurrences correctly across DST boundaries', () => {
-    const rrule = RRule.fromString(
-      'DTSTART=20181031T180000Z\nRRULE:FREQ=WEEKLY;UNTIL=20181115T050000Z',
-    );
+    const rrule = RRule.fromString('DTSTART=20181031T180000Z\nRRULE:FREQ=WEEKLY;UNTIL=20181115T050000Z');
     expect(rrule.all()).toEqual([
       new Date('2018-10-31T18:00:00.000Z'),
       new Date('2018-11-07T18:00:00.000Z'),
@@ -4135,8 +3269,7 @@ describe('RRule', () => {
   });
 
   it('generates around dst (#249)', () => {
-    const ruleString =
-      'DTSTART:20181101T120000Z\nRRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=MO,WE,FR;COUNT=4;WKST=SU';
+    const ruleString = 'DTSTART:20181101T120000Z\nRRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=MO,WE,FR;COUNT=4;WKST=SU';
     const rrule = RRule.fromString(ruleString);
 
     expect(rrule.all()).toEqual([
@@ -4220,12 +3353,8 @@ describe('RRule', () => {
   it('throws an error when dtstart is invalid', () => {
     const invalidDate = new Date(undefined);
     const validDate = datetime(2017, 1, 1);
-    expect(() => new RRule({ dtstart: invalidDate })).toThrow(
-      'Invalid options: dtstart',
-    );
-    expect(() => new RRule({ dtstart: validDate, until: invalidDate })).toThrow(
-      'Invalid options: until',
-    );
+    expect(() => new RRule({ dtstart: invalidDate })).toThrow('Invalid options: dtstart');
+    expect(() => new RRule({ dtstart: validDate, until: invalidDate })).toThrow('Invalid options: until');
 
     const rule = new RRule({
       dtstart: datetime(2017, 1, 1),
@@ -4233,17 +3362,9 @@ describe('RRule', () => {
       interval: 1,
     });
 
-    expect(() => rule.after(invalidDate)).toThrow(
-      'Invalid date passed in to RRule.after',
-    );
-    expect(() => rule.before(invalidDate)).toThrow(
-      'Invalid date passed in to RRule.before',
-    );
-    expect(() => rule.between(invalidDate, validDate)).toThrow(
-      'Invalid date passed in to RRule.between',
-    );
-    expect(() => rule.between(validDate, invalidDate)).toThrow(
-      'Invalid date passed in to RRule.between',
-    );
+    expect(() => rule.after(invalidDate)).toThrow('Invalid date passed in to RRule.after');
+    expect(() => rule.before(invalidDate)).toThrow('Invalid date passed in to RRule.before');
+    expect(() => rule.between(invalidDate, validDate)).toThrow('Invalid date passed in to RRule.between');
+    expect(() => rule.between(validDate, invalidDate)).toThrow('Invalid date passed in to RRule.between');
   });
 });

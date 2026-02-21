@@ -1,5 +1,5 @@
 import { reset as resetMockDate, set as setMockDate } from 'mockdate';
-import { DateWithZone } from '../src/datewithzone';
+import { DateWithZone } from '../src/date';
 import { datetime, expectedDate } from './lib/utils';
 
 describe('toString', () => {
@@ -24,9 +24,7 @@ it('returns the time of the date', () => {
 });
 
 it('rejects invalid dates', () => {
-  expect(() => new DateWithZone(new Date(undefined))).toThrow(
-    'Invalid date passed to DateWithZone',
-  );
+  expect(() => new DateWithZone(new Date(undefined))).toThrow('Invalid date passed to DateWithZone');
 });
 
 describe('rezonedDate', () => {
@@ -44,11 +42,7 @@ describe('rezonedDate', () => {
     const d = new Date(Date.parse('2010-10-05T11:00:00'));
     const dt = new DateWithZone(d, targetZone);
     expect(dt.rezonedDate()).toEqual(
-      expectedDate(
-        new Date(Date.parse('2010-10-05T11:00:00')),
-        currentLocalDate,
-        targetZone,
-      ),
+      expectedDate(new Date(Date.parse('2010-10-05T11:00:00')), currentLocalDate, targetZone),
     );
 
     resetMockDate();

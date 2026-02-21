@@ -1,7 +1,7 @@
-import { untilStringToDate } from './dateutil';
-import { Days } from './rrule';
-import { Frequency, type Options } from './types';
-import { Weekday } from './weekday';
+import { untilStringToDate } from '../date';
+import { Days } from '../rrule';
+import { Frequency, type Options } from '../types';
+import { Weekday } from '../weekday';
 
 export function parseString(rfcString: string): Partial<Options> {
   const options = rfcString
@@ -14,9 +14,7 @@ export function parseString(rfcString: string): Partial<Options> {
 export function parseDtstart(line: string) {
   const options: Partial<Options> = {};
 
-  const dtstartWithZone = /DTSTART(?:;TZID=([^:=]+?))?(?::|=)([^;\s]+)/i.exec(
-    line,
-  );
+  const dtstartWithZone = /DTSTART(?:;TZID=([^:=]+?))?(?::|=)([^;\s]+)/i.exec(line);
 
   if (!dtstartWithZone) {
     return options;

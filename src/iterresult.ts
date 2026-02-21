@@ -28,12 +28,8 @@ export default class IterResult<M extends QueryMethodTypes> {
     this.args = args;
 
     if (method === 'between') {
-      this.maxDate = args.inc!
-        ? args.before!
-        : new Date(args.before!.getTime() - 1);
-      this.minDate = args.inc!
-        ? args.after!
-        : new Date(args.after!.getTime() + 1);
+      this.maxDate = args.inc! ? args.before! : new Date(args.before!.getTime() - 1);
+      this.minDate = args.inc! ? args.after! : new Date(args.after!.getTime() + 1);
     } else if (method === 'before') {
       this.maxDate = args.inc! ? args.dt! : new Date(args.dt!.getTime() - 1);
     } else if (method === 'after') {
@@ -97,5 +93,29 @@ export default class IterResult<M extends QueryMethodTypes> {
 
   clone() {
     return new IterResult(this.method, this.args);
+  }
+}
+
+type Iterator = (d: Date, len: number) => boolean;
+
+/**
+ * IterResult subclass that calls a callback function on each add,
+ * and stops iterating when the callback returns false.
+ */
+export class CallbackIterResult extends IterResult<'all' | 'between'> {
+  private iterator: Iterator;
+
+  constructor(method: 'all' | 'between', args: Partial<IterArgs>, iterator: Iterator) {
+    super(method, args);
+
+    this.iterator = iterator;
+  }
+
+  add(date: Date) {
+    if (this.iterator(date, this._result.length)) {
+      this._result.push(date);
+      return true;
+    }
+    return false;
   }
 }
