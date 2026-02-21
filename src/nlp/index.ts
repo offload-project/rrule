@@ -19,7 +19,6 @@ import ToText, { type DateFormatter, type GetText } from './totext';
  *
  * Implementation of RRule.fromText() and RRule::toText().
  *
- *
  * On the client side, this file needs to be included
  * when those functions are used.
  *
