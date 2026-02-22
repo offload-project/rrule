@@ -1,6 +1,6 @@
 {
   "name": "@offload-project/rrule",
-  "version": "2.8.1",
+  "version": "2.9.0",
   "description": "JavaScript library for working with recurrence rules for calendar dates.",
   "homepage": "http://offload-project.github.io/rrule/",
   "license": "BSD-3-Clause",
