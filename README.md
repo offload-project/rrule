@@ -44,7 +44,7 @@ $ npm install @offload-project/rrule
 **RRule:**
 
 ```js
-import { datetime, RRule, RRuleSet, rrulestr } from 'rrule'
+import { datetime, RRule, RRuleSet, rrulestr, validate } from 'rrule'
 
 // Create a rule:
 const rule = new RRule({
@@ -158,6 +158,19 @@ rrulestr('DTSTART:20120201T023000Z\nRRULE:FREQ=MONTHLY;COUNT=5', {
 rrulestr(
   'DTSTART:20120201T023000Z\nRRULE:FREQ=MONTHLY;COUNT=5\nRDATE:20120701T023000Z,20120702T023000Z\nEXRULE:FREQ=MONTHLY;COUNT=2\nEXDATE:20120601T023000Z'
 )
+```
+
+**validate:**
+
+```js
+import { validate } from '@offload-project/rrule'
+
+// Check if a string is a valid rule or ruleset
+validate('RRULE:FREQ=WEEKLY;COUNT=3')
+// { valid: true }
+
+validate('RRULE:FREQ=BOGUS')
+// { valid: false, error: { message: 'Invalid frequency: ...', cause: Error } }
 ```
 
 ### Important: Use UTC dates
@@ -740,6 +753,60 @@ Additionally, it accepts the following keyword arguments:
     If it is not given, and the property is not found, <code>'UTC'</code> will be used by default.
   </dd>
 </dl>
+
+---
+
+#### `validate` Function
+
+```js
+validate(rruleStr[, options])
+```
+
+Validates an RRULE or RRuleSet string without throwing. Accepts the same string formats and options as `rrulestr`.
+
+Returns a `ValidationResult`:
+
+```js
+import { validate } from '@offload-project/rrule'
+
+// Valid single rule
+validate('RRULE:FREQ=WEEKLY;COUNT=3')
+// { valid: true }
+
+// Valid ruleset string
+validate(
+  'DTSTART:19970902T090000Z\n' +
+  'RRULE:FREQ=YEARLY;COUNT=6;BYDAY=TU,TH\n' +
+  'EXDATE:19970911T090000Z'
+)
+// { valid: true }
+
+// Invalid input
+validate('RRULE:FREQ=BOGUS')
+// { valid: false, error: { message: 'Invalid frequency: ...', cause: Error } }
+
+// With options (same as rrulestr options)
+validate('RRULE:FREQ=DAILY', { dtstart: new Date('1997-09-02T09:00:00Z') })
+// { valid: true }
+```
+
+The result type is a discriminated union:
+
+```ts
+interface ValidationSuccess {
+  valid: true
+}
+
+interface ValidationError {
+  valid: false
+  error: {
+    message: string    // Human-readable error description
+    cause?: Error      // Original error object with stack trace
+  }
+}
+
+type ValidationResult = ValidationSuccess | ValidationError
+```
 
 ---
 

@@ -21,4 +21,5 @@ export { RRule } from './rrule';
 export { RRuleBase } from './rrulebase';
 export { RRuleSet } from './rruleset';
 export { type ByWeekday, Frequency, type Options } from './types';
+export { type ValidationError, type ValidationResult, type ValidationSuccess, validate } from './validate';
 export { ALL_WEEKDAYS, Weekday, type WeekdayStr } from './weekday';
