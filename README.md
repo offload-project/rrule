@@ -1,10 +1,10 @@
-<p align="center">
-    <a href="https://www.npmjs.com/package/@offload-project/rrule"><img src="https://img.shields.io/github/package-json/v/offload-project/rrule?style=flat-square" alt="Latest Version"></a>
-    <a href="https://github.com/offload-project/rrule/actions/workflows/test.yml"><img src="https://img.shields.io/github/actions/workflow/status/offload-project/rrule/test.yml?branch=main&style=flat-square&label=tests" alt="GitHub Tests Action Status"></a>
-    <a href="https://github.com/offload-project/rrule/actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/offload-project/rrule/release.yml?style=flat-square&label=build" alt="GitHub Release Action Status"></a>
-</p>
-
 # rrule.js
+
+[![Latest Version on Packagist](https://img.shields.io/github/package-json/v/offload-project/rrule?style=flat-square)](https://packagist.org/packages/offload-project/rrule)
+[![Tests](https://img.shields.io/github/actions/workflow/status/offload-project/rrule/test.yml?branch=main&label=tests&style=flat-square)](https://github.com/offload-project/rrule/actions/workflows/test.yml)
+[![Build](https://img.shields.io/github/actions/workflow/status/offload-project/rrule/release.yml?label=build&style=flat-square)](https://github.com/offload-project/rrule/actions/workflows/release.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE.md)
+
 
 A JavaScript / TypeScript library for working with recurrence rules for calendar dates, as defined in the [iCalendar RFC (RFC 5545)](https://tools.ietf.org/html/rfc5545). A partial port of the `rrule` module from [python-dateutil](http://labix.org/python-dateutil/), with parsing and serialization to and from natural language on top.
 
