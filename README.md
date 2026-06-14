@@ -1,6 +1,6 @@
 # rrule.js
 
-[![Latest Version on Packagist](https://img.shields.io/github/package-json/v/offload-project/rrule?style=flat-square)](https://packagist.org/packages/offload-project/rrule)
+[![Latest Version on NPM](https://img.shields.io/github/package-json/v/offload-project/rrule?style=flat-square)](https://packagist.org/packages/offload-project/rrule)
 [![Tests](https://img.shields.io/github/actions/workflow/status/offload-project/rrule/test.yml?branch=main&label=tests&style=flat-square)](https://github.com/offload-project/rrule/actions/workflows/test.yml)
 [![Build](https://img.shields.io/github/actions/workflow/status/offload-project/rrule/release.yml?label=build&style=flat-square)](https://github.com/offload-project/rrule/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE.md)
